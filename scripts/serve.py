@@ -19,6 +19,16 @@ class Handler(SimpleHTTPRequestHandler):
             super().log_message(fmt, *args)
 
 if __name__ == '__main__':
-    with ThreadingHTTPServer(('127.0.0.1', PORT), Handler) as httpd:
-        print(f'Serving {ROOT} at http://127.0.0.1:{PORT}/ (no-store)')
-        httpd.serve_forever()
+    try:
+        httpd = ThreadingHTTPServer(('127.0.0.1', PORT), Handler)
+    except OSError as e:
+        if getattr(e, 'errno', None) == 48:
+            sys.exit(f'Port {PORT} is already in use (another copy of this server?). '
+                     f'Stop it, or run: python3 scripts/serve.py {PORT + 1}')
+        raise
+    with httpd:
+        print(f'Serving {ROOT} at http://127.0.0.1:{PORT}/ (no-store)', flush=True)
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            pass
