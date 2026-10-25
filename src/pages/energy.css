@@ -1,0 +1,148 @@
+/* Energy & Savings — page styles (en- prefix). Geometry, sizes and colours follow
+   design/Energy.dc.html; colours map to tokens. The four local variables are design colours
+   that have no token: the amber "assumed" input border and the dark ROI card's secondary inks. */
+.en-page { --en-assumed: #E6C77A; --en-dark-eyebrow: #B9D3D0; --en-dark-dt: #C9D6D2; --en-dark-rule: #3A5A50; padding: 32px 40px 40px; gap: 24px; }
+
+/* Intro + controls */
+.en-intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; }
+.en-intro__text { display: flex; flex-direction: column; gap: 8px; max-width: 680px; }
+.en-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
+.en-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.en-field__label { font-size: 12px; color: var(--muted); }
+.en-field__label--split { display: flex; justify-content: space-between; gap: 4px; }
+.en-select { height: 44px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); padding: 0 16px; font-size: 14px; color: var(--text); max-width: 100%; }
+.en-select--bold { font-weight: 700; }
+.en-reset { padding: 10px 16px; }
+
+/* Verified / Modelled / Potential legend */
+.en-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); }
+.en-legend__pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
+.en-legend__pill strong { color: var(--text); }
+.en-dot { width: 10px; height: 10px; border-radius: 999px; flex: 0 0 auto; }
+.en-sq { width: 10px; height: 10px; border-radius: 2px; flex: 0 0 auto; }
+.en-line { width: 14px; height: 2px; background: var(--primary); flex: 0 0 auto; }
+.en-c-primary { background: var(--primary); }
+.en-c-accent { background: var(--accent); }
+.en-c-deep { background: var(--accent-deep); }
+.en-c-soft { background: var(--accent-soft); }
+.en-c-potential { background: var(--border-strong); }
+
+/* Headline figures */
+.en-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px; }
+.en-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.en-stat__label { font-size: 13px; color: var(--muted); }
+.en-stat__value { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.en-stat__sub { font-size: 12px; color: var(--muted); }
+
+/* Two columns */
+.en-cols { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+.en-main { flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.en-aside { flex: 1 1 300px; max-width: 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+
+/* Cards */
+.en-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.en-card--calc { gap: 20px; }
+.en-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.en-head__text { display: flex; flex-direction: column; gap: 4px; }
+.en-h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.en-sub { font-size: 13px; color: var(--muted); }
+.en-keys { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); }
+.en-key { display: inline-flex; align-items: center; gap: 6px; }
+.en-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.en-note-sm { font-size: 11px; color: var(--muted); }
+
+/* Consumption / cost bars */
+.en-bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px; }
+.en-bars__group { display: flex; flex-direction: column; gap: 12px; }
+.en-bars__title { font-size: 13px; font-weight: 700; }
+.en-brow { display: grid; grid-template-columns: 96px minmax(0, 1fr) 84px; gap: 10px; align-items: center; font-size: 12px; }
+.en-brow__label { color: var(--muted); }
+.en-brow__val { font-variant-numeric: tabular-nums; text-align: right; }
+.en-track { height: 14px; background: var(--divider); border-radius: 0 4px 4px 0; display: flex; }
+.en-track--sm { height: 12px; }
+.en-fill { height: 100%; border-radius: 0 4px 4px 0; transition: width .6s var(--ease); }
+.en-fill--existing { background: var(--primary); }
+.en-fill--led { background: var(--accent); }
+.en-fill--ctrl { background: var(--accent-soft); }
+
+/* Scenario table */
+.en-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.en-table { width: 100%; min-width: 620px; font-size: 13px; border-collapse: collapse; }
+.en-table thead tr { text-align: left; font-size: 12px; color: var(--muted); }
+.en-table th { padding: 8px 12px; font-weight: 400; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+.en-table th:first-child { padding-left: 0; text-align: left; }
+.en-table th:last-child { padding-right: 0; }
+.en-table tbody { font-variant-numeric: tabular-nums; }
+.en-table td { padding: 10px 12px; border-bottom: 1px solid var(--divider); text-align: right; white-space: nowrap; }
+.en-table td:first-child { padding-left: 0; text-align: left; white-space: normal; }
+.en-table td:last-child { padding-right: 0; }
+.en-table tbody tr:last-child td { border-bottom: 0; }
+
+/* Cumulative savings chart */
+.en-chart-host { display: flex; flex-direction: column; gap: 16px; }
+.en-chart { position: relative; height: 200px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-end; gap: 10px; padding: 0 8px; }
+.en-chart__line { position: absolute; left: 0; right: 0; height: 0; border-top: 2px solid var(--primary); transition: bottom .6s var(--ease); }
+.en-chart__linelabel { position: absolute; right: 8px; font-size: 11px; color: var(--text); background: var(--surface); padding: 0 4px; font-variant-numeric: tabular-nums; transition: bottom .6s var(--ease); }
+.en-chart__col { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 6px; min-width: 0; }
+.en-chart__val { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.en-chart__bar { width: 22px; max-width: 100%; background: var(--accent); border-radius: 4px 4px 0 0; transition: height .6s var(--ease); }
+.en-chart__years { display: flex; gap: 10px; padding: 0 8px; }
+.en-chart__yr { flex: 1 1 0; text-align: center; font-size: 11px; color: var(--muted); }
+
+/* Classroom rows */
+.en-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.en-rooms { display: flex; flex-direction: column; gap: 16px; }
+.en-room { display: grid; grid-template-columns: 150px minmax(0, 1fr) 150px; gap: 14px; align-items: center; margin: -6px -10px; padding: 6px 10px; border-radius: 10px; transition: background-color .2s; }
+.en-room.is-active { background: var(--accent-tint); }
+.en-room__name { font-size: 14px; }
+.en-room.is-active .en-room__name { font-weight: 700; }
+.en-room__sub { font-size: 12px; color: var(--muted); }
+.en-room__bars { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.en-room__vals { display: flex; flex-direction: column; font-size: 12px; font-variant-numeric: tabular-nums; text-align: right; }
+
+/* Card footers (portfolio totals, water figures) */
+.en-foot { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px; padding-top: 14px; border-top: 1px solid var(--divider); }
+.en-foot__item { display: flex; flex-direction: column; min-width: 0; }
+.en-foot__label { font-size: 12px; color: var(--muted); }
+.en-foot__value { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.en-foot__sub { font-size: 11px; color: var(--muted); }
+
+/* Inputs */
+.en-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 12px; }
+.en-input { height: 40px; width: 100%; min-width: 0; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 0 12px; font-size: 14px; color: var(--text); }
+.en-input--assumed { border-color: var(--en-assumed); }
+.en-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.en-grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.en-grid3 .en-input { padding: 0 10px; }
+
+/* Assumptions form */
+.en-form { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.en-form__head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.en-form__title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.en-tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--status-review-bg); color: var(--status-review-fg); font-weight: 700; white-space: nowrap; }
+.en-form__h { font-size: 13px; font-weight: 700; }
+.en-minitag { font-size: 10px; padding: 1px 6px; border-radius: 999px; white-space: nowrap; }
+.en-minitag--assumed { background: var(--status-review-bg); color: var(--status-review-fg); }
+.en-minitag--entered { background: var(--divider); }
+
+/* ROI card */
+.en-roi { background: var(--primary); color: #FFFFFF; border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+.en-roi__eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--en-dark-eyebrow); }
+.en-roi__list { margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.en-roi__row { display: flex; justify-content: space-between; gap: 8px; }
+.en-roi__row dt { color: var(--en-dark-dt); }
+.en-roi__row dd { margin: 0; text-align: right; }
+.en-roi__row--total { padding-top: 8px; border-top: 1px solid var(--en-dark-rule); }
+.en-roi__note { font-size: 12px; line-height: 1.5; color: var(--en-dark-dt); }
+
+.en-disclaimer { font-size: 12px; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .en-page { padding: 24px 16px 40px; gap: 24px; }
+  .en-aside { max-width: none; }
+}
+@media (max-width: 520px) {
+  .en-room { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .en-room__vals { text-align: left; }
+  .en-brow { grid-template-columns: 84px minmax(0, 1fr) 76px; }
+}

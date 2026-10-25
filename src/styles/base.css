@@ -1,0 +1,65 @@
+@font-face { font-family: "Helvetica Toolkit"; src: url(../../assets/fonts/HelveticaToolkit-Regular.ttf) format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Toolkit"; src: url(../../assets/fonts/HelveticaToolkit-Bold.ttf) format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Toolkit"; src: local("Helvetica Neue Light"), local("HelveticaNeue-Light"), local("HelveticaNeue-Thin"), url(../../assets/fonts/HelveticaToolkit-Light.ttf) format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+a { color: var(--link); }
+a:hover { color: var(--text); }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; height: auto; }
+svg { flex-shrink: 0; }
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+table { border-collapse: collapse; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+input[type="range"] { accent-color: var(--link); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--link); width: 18px; height: 18px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[hidden] { display: none !important; }
+
+/* Typography scale (from the design) */
+.display { font-size: 42px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.08; text-wrap: pretty; }
+.lead { font-size: 16px; color: var(--muted); line-height: 1.5; text-wrap: pretty; }
+.h-section { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
+.h-sub { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.h-block { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+.h-card { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.h-item { font-size: 16px; font-weight: 700; }
+.eyebrow { font-size: 12px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-2); }
+.muted { color: var(--muted); }
+.muted-2 { color: var(--muted-2); }
+.small { font-size: 13px; }
+.tiny { font-size: 12px; }
+.bold { font-weight: 700; }
+.light { font-weight: 300; }
+.link { color: var(--link); font-size: 13px; text-decoration: none; }
+.link:hover { text-decoration: underline; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Page layout */
+.page { padding: var(--content-pad) var(--content-pad) 48px; display: flex; flex-direction: column; gap: 40px; min-width: 0; width: 100%; }
+.page-intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.page-intro__text { display: flex; flex-direction: column; gap: 10px; max-width: 640px; }
+.section { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.grid { display: grid; gap: 20px; }
+.grid--tiles { grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+.stack { display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; }
+.wrap { flex-wrap: wrap; }
+.between { justify-content: space-between; }
+.center { justify-content: center; }
+.grow { flex: 1 1 auto; min-width: 0; }
+.gap-4 { gap: 4px; } .gap-6 { gap: 6px; } .gap-8 { gap: 8px; } .gap-10 { gap: 10px; } .gap-12 { gap: 12px; } .gap-16 { gap: 16px; } .gap-18 { gap: 18px; } .gap-20 { gap: 20px; } .gap-24 { gap: 24px; } .gap-32 { gap: 32px; }
+.mt-auto { margin-top: auto; } .ml-auto { margin-left: auto; }
+
+@media (max-width: 720px) {
+  .page { padding: 24px 16px 40px; gap: 28px; }
+  .display { font-size: 32px; }
+}

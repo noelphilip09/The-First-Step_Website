@@ -1,0 +1,32 @@
+/* Classroom Library (src/pages/library.js). Shared classes come from components.css;
+   everything here is page-specific and prefixed lib-. Colours are tokens only. */
+
+.lib-filters { align-items: center; }
+
+/* Each grid item is a wrapper cell: the scroll-reveal transform / fade-swap animation
+   lives on the wrapper, so the tile's own hover lift (a transform) keeps working. */
+.lib-cell { display: grid; min-width: 0; }
+.lib-cell--span { grid-column: 1 / -1; }
+.lib-tiles .fade-swap, .lib-rooms .fade-swap { animation-delay: calc(var(--i, 0) * 45ms); }
+
+/* Classroom type tiles */
+.lib-illo { stroke: var(--primary); max-width: 100%; height: auto; }
+.lib-tiles .tile__foot { flex-wrap: wrap; }
+.lib-size { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+/* Your classrooms */
+.lib-rooms__grid { gap: 16px; }
+.lib-add { gap: 8px; }
+.lib-chips { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--muted); }
+.lib-chip { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+
+/* New classroom dialog */
+.lib-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
+.lib-form__wide { grid-column: 1 / -1; }
+
+@media (max-width: 560px) {
+  .lib-form__grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lib-tiles .fade-swap, .lib-rooms .fade-swap { animation-delay: 0s; }
+}

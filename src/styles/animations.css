@@ -1,0 +1,67 @@
+/* Route progress bar */
+.progress { position: fixed; top: 0; left: 0; height: 2px; width: 100%; z-index: 1000; pointer-events: none; opacity: 0; transition: opacity .25s; }
+.progress::before { content: ""; display: block; height: 100%; width: 0; background: var(--accent-deep); transition: width .3s var(--ease); }
+.progress.is-active { opacity: 1; }
+.progress.is-active::before { width: 72%; transition: width 3.5s cubic-bezier(.1, .6, .2, 1); }
+.progress.is-done::before { width: 100%; transition: width .15s ease-out; }
+
+/* Skeleton shimmer */
+.skeleton { position: relative; overflow: hidden; background: var(--divider); border-radius: 10px; display: block; max-width: 100%; }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .65), transparent); animation: shimmer 1.4s infinite; }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+.sk-page { animation: fade-in .2s var(--ease); }
+
+/* Page enter */
+.page-enter { animation: page-in var(--dur) var(--ease) both; }
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.fade-swap { animation: fade-in .25s var(--ease) both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.slide-in { animation: slide-in .3s var(--ease) both; }
+@keyframes slide-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+
+/* Scroll reveal (staggered with --i) */
+/* Uses the independent `translate` property so it never fights a component's own transform (e.g. .tile:hover lift). */
+[data-reveal] { opacity: 0; translate: 0 14px; transition: opacity .55s var(--ease), translate .55s var(--ease); transition-delay: calc(min(var(--i, 0), 8) * 60ms); }
+[data-reveal].is-visible { opacity: 1; translate: 0 0; }
+
+/* Spinner */
+.spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin .7s linear infinite; flex: 0 0 16px; display: inline-block; }
+.spinner--lg { width: 28px; height: 28px; border-width: 3px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.inline-loading { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
+
+/* Lazy images */
+.lazy-img { display: block; position: relative; overflow: hidden; background: var(--surface-2); }
+.lazy-img img { opacity: 0; transition: opacity .5s var(--ease), transform .9s var(--ease); transform: scale(1.03); width: 100%; height: 100%; object-fit: cover; }
+.lazy-img.is-loaded img { opacity: 1; transform: none; }
+.lazy-img::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent); transform: translateX(-100%); animation: shimmer 1.4s infinite; }
+.lazy-img.is-loaded::before { display: none; }
+.lazy-img--contain img { object-fit: contain; }
+
+/* Toasts */
+.toasts { position: fixed; right: 24px; bottom: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 1100; pointer-events: none; }
+.toast { pointer-events: auto; display: flex; align-items: center; gap: 10px; background: var(--text); color: #FFFFFF; padding: 12px 16px; border-radius: 12px; font-size: 13px; box-shadow: var(--shadow-pop); animation: toast-in .3s var(--ease); max-width: min(380px, calc(100vw - 48px)); }
+.toast__icon { display: inline-flex; color: #9FD3A8; }
+.toast--info .toast__icon { color: #BFD7E6; }
+.toast--error .toast__icon { color: #F2A7A0; }
+.toast.is-leaving { animation: toast-out .25s var(--ease) forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } }
+@keyframes toast-out { to { opacity: 0; transform: translateY(6px); } }
+
+/* Popover / dialog */
+@keyframes pop-in { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
+@keyframes dialog-in { from { opacity: 0; transform: translateY(10px) scale(.98); } }
+
+/* Misc */
+.pulse { animation: pulse 1.6s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+.check-pop { animation: check-pop .35s var(--ease); }
+@keyframes check-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+.bar__fill { animation: bar-grow .8s var(--ease); }
+@keyframes bar-grow { from { width: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1; translate: 0 0; }
+  .lazy-img img { transform: none; }
+}

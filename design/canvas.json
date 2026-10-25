@@ -1,0 +1,119 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Colour.dc.html": {
+      "expand": "fill",
+      "h": 2640,
+      "title": "05 Colour & Material Guidelines",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
+    },
+    "Energy.dc.html": {
+      "expand": "fill",
+      "h": 2080,
+      "is_interactive": true,
+      "title": "06 Energy & Savings",
+      "w": 1440,
+      "x": 7600,
+      "y": 0
+    },
+    "Impact.dc.html": {
+      "expand": "fill",
+      "h": 1700,
+      "title": "07 Impact & Outcomes",
+      "w": 1440,
+      "x": 0,
+      "y": 2960
+    },
+    "Lighting.dc.html": {
+      "expand": "fill",
+      "h": 1310,
+      "title": "03 Lighting Guidelines",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 2347,
+      "title": "01 Classroom Library",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Plants.dc.html": {
+      "expand": "fill",
+      "h": 1910,
+      "title": "04 Plant Guidelines",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "Reports.dc.html": {
+      "expand": "fill",
+      "h": 1640,
+      "title": "08 Reports & Review",
+      "w": 1440,
+      "x": 1520,
+      "y": 2960
+    },
+    "Settings.dc.html": {
+      "expand": "fill",
+      "h": 1640,
+      "title": "09 Settings & Assets",
+      "w": 1440,
+      "x": 3040,
+      "y": 2960
+    },
+    "Studio.dc.html": {
+      "expand": "fill",
+      "h": 1480,
+      "is_interactive": true,
+      "title": "02 Design Studio",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-22T03:40:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "row1": {
+      "kind": "title1",
+      "maxW": 8000,
+      "text": "Plan a classroom — Library → Design Studio → Guidelines (Lighting · Plants · Colour & Material) → Energy case",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "row2": {
+      "kind": "title1",
+      "maxW": 4480,
+      "text": "Impact, reports and administration",
+      "w": 240,
+      "x": 0,
+      "y": 2660
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Studio.dc.html",
+    "Lighting.dc.html",
+    "Plants.dc.html",
+    "Colour.dc.html",
+    "Energy.dc.html",
+    "Impact.dc.html",
+    "Reports.dc.html",
+    "Settings.dc.html"
+  ],
+  "pages": [],
+  "title": "The First Step — USYD Biophilic Classroom Toolkit"
+}

@@ -1,0 +1,139 @@
+/* Design Guidelines pages (Lighting, Plants, Colour & Material) — shared, gl- prefixed.
+   Builds on .banner, .tile, .dot-icon, .btn, .h-block / .h-card, .tiny / .muted from the global sheets. */
+:root {
+  --gl-verify: #E6C77A;                 /* "Verify on site" dot — not in tokens.css */
+  --gl-trait-bg: #F6F5F1;               /* species trait chip background */
+  --gl-safe-bg: #E3EFD9;                /* "Non-toxic" pill */
+  --gl-safe-icon: #4A9A3F;
+  --gl-banner-kicker: #D3D8D5;
+  --gl-banner-lead: #C9CFCB;
+  --gl-swatch-label: rgba(28, 36, 32, 0.62);
+}
+.gl-page { gap: 32px; }
+
+/* ---------- Banner ---------- */
+.banner.gl-banner { flex-direction: column; justify-content: center; align-items: stretch; min-height: 318px; border-radius: 24px; padding: 36px 44px 40px; color: #FFFFFF; background: #0A110E; }
+.gl-banner--plants { background: #050E0A; }
+.gl-banner--colour { background: #080F0D; }
+.gl-banner__bg { position: absolute; inset: 0; background: transparent; }
+.gl-banner__shade { position: absolute; inset: 0; pointer-events: none; }
+.gl-banner--lighting .gl-banner__shade { background: linear-gradient(180deg, rgba(10,17,14,0.18) 0%, rgba(10,17,14,0.78) 30%, rgba(10,17,14,0.85) 55%, rgba(10,17,14,0.94) 100%), linear-gradient(90deg, rgba(10,17,14,0.55) 0%, rgba(10,17,14,0.15) 55%, rgba(10,17,14,0) 100%); }
+.gl-banner--plants .gl-banner__shade { background: linear-gradient(180deg, rgba(5,14,10,0.55) 0%, rgba(5,14,10,0.84) 28%, rgba(5,14,10,0.82) 100%); }
+.gl-banner--colour .gl-banner__shade { background: linear-gradient(180deg, rgba(8,15,13,0.57) 0%, rgba(8,15,13,0.76) 20%, rgba(8,15,13,0.76) 45%, rgba(8,15,13,0.87) 65%, rgba(8,15,13,0.93) 100%); }
+.gl-banner__hero { position: absolute; background: transparent; pointer-events: none; }
+.gl-banner__hero::before { display: none; }
+.gl-banner__body { position: relative; display: flex; flex-direction: column; align-items: flex-start; max-width: 640px; }
+.gl-banner__kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gl-banner-kicker); margin-bottom: 30px; }
+.gl-banner__body .display { margin: 0 0 10px; }
+.gl-banner__lead { font-size: 16px; color: var(--gl-banner-lead); line-height: 1.5; text-wrap: pretty; }
+.gl-banner__pills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 34px; }
+.gl-banner__pill { display: inline-flex; align-items: center; min-height: 32px; padding: 6px 14px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.12); font-size: 13px; font-weight: 700; color: #FFFFFF; }
+
+/* ---------- Context (relevance select + legend) ---------- */
+.gl-context { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.gl-select { height: 44px; max-width: 100%; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface); padding: 0 16px; font-size: 14px; color: var(--text); }
+.gl-legend { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 14px; font-size: 12px; color: var(--muted); }
+.gl-legend__item { display: inline-flex; align-items: center; gap: 6px; }
+.gl-dot { display: inline-block; width: 10px; height: 10px; border-radius: 999px; flex: 0 0 10px; }
+.gl-dot--rec { background: var(--accent); }
+.gl-dot--verify { background: var(--gl-verify); }
+.gl-dot--not { background: var(--border-strong); }
+
+/* ---------- Guideline tiles ---------- */
+.gl-section { display: flex; flex-direction: column; gap: 40px; }
+.gl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 12px; }
+.tile.gl-tile { width: 100%; align-items: flex-start; gap: 12px; padding: 18px; border-radius: var(--radius-lg); text-align: left; min-height: 150px; font: inherit; cursor: pointer; }
+.gl-tile__head { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.gl-tile__icon--review { background: var(--status-review-bg); color: var(--status-review-fg); }
+.gl-tile__body { display: flex; flex-direction: column; gap: 2px; }
+.gl-tile__code { font-size: 11px; color: var(--muted); }
+.gl-tile__title { font-size: 15px; font-weight: 700; }
+.gl-tile__sub { font-size: 12px; color: var(--muted); }
+
+/* ---------- Open guideline detail card ---------- */
+.gl-detail-slot:empty { display: none; }
+.gl-detail { background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius-xl); padding: 22px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 18px; align-items: start; }
+.gl-detail__head { display: flex; flex-direction: column; gap: 8px; grid-column: 1 / -1; }
+.gl-detail__eyebrow { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+.gl-fact { display: flex; gap: 12px; }
+.gl-fact__text { display: flex; flex-direction: column; gap: 2px; }
+.gl-fact__label { font-size: 12px; color: var(--muted); }
+.gl-fact__value { font-size: 14px; }
+.gl-disc { width: 36px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: center; flex: 0 0 36px; background: var(--surface-2); color: var(--text); }
+.gl-disc--accent { background: var(--accent-tint); color: var(--accent-deep); }
+.gl-disc--review { background: var(--status-review-bg); color: var(--status-review-fg); }
+.gl-detail__foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn.gl-btn--xs { min-height: 36px; padding: 6px 12px; font-size: 12px; gap: 6px; }
+
+/* ---------- Blocks (Species, Colour combinations, All colours) ---------- */
+.gl-block { display: flex; flex-direction: column; gap: 14px; }
+.gl-block--loose { gap: 28px; }
+.gl-block__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.gl-block__head--baseline { align-items: baseline; gap: 8px 16px; }
+.gl-block__link { font-size: 13px; font-weight: 700; text-decoration: none; }
+.gl-block__desc { font-size: 13px; color: var(--muted); }
+.gl-note { display: inline-flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--muted); }
+.gl-note svg { flex: 0 0 14px; margin-top: 3px; }
+
+/* ---------- Species image cards ---------- */
+.gl-species-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 16px; }
+.gl-species { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+.gl-species__img { width: 100%; border-radius: 16px; }
+.gl-species__head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.gl-species__name { display: flex; flex-direction: column; gap: 2px; }
+.gl-species__latin { font-size: 14px; color: var(--muted); }
+.gl-safety { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 6px 12px 6px 8px; border-radius: 999px; white-space: nowrap; }
+.gl-safety--ok { background: var(--gl-safe-bg); color: var(--status-within-fg); }
+.gl-safety--ok svg { color: var(--gl-safe-icon); }
+.gl-safety--warn { background: var(--status-notreq-bg); color: var(--status-notreq-fg); }
+.gl-safety--warn svg { color: var(--status-notreq-icon); }
+.gl-traits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.gl-trait { display: flex; align-items: center; gap: 8px; padding: 12px 10px; border-radius: 12px; background: var(--gl-trait-bg); font-size: 13px; line-height: 1.25; min-height: 48px; }
+.gl-trait svg { color: var(--primary-ink); flex: 0 0 18px; }
+
+/* ---------- Colour combinations (palette cards) ---------- */
+.gl-palettes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px; }
+.gl-palette { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 12px 12px 16px; display: flex; flex-direction: column; gap: 12px; }
+.gl-palette__strip { display: flex; gap: 3px; height: 112px; border-radius: 14px; overflow: hidden; }
+.gl-palette__body { display: flex; flex-direction: column; gap: 4px; padding: 0 6px; }
+.gl-palette__row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.gl-palette__name { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+.gl-palette__tag { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: var(--accent-tint); color: var(--accent-deep); white-space: nowrap; }
+.gl-benefit { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.gl-benefit svg { flex: 0 0 16px; }
+
+/* ---------- All colours by category (swatch buttons) ---------- */
+.gl-family { display: flex; flex-direction: column; gap: 12px; }
+.gl-family__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.gl-family__benefit { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.gl-family__benefit svg { flex: 0 0 16px; }
+.gl-family__benefit b { font-weight: 700; color: var(--text); }
+.gl-swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.gl-swatch { aspect-ratio: 16 / 10; min-height: 150px; border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; text-align: left; color: var(--text); font: inherit; cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+.gl-swatch:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.gl-swatch__top { display: flex; flex-direction: column; gap: 4px; }
+.gl-swatch__code { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--gl-swatch-label); }
+.gl-swatch__name { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+.gl-swatch__meta { display: flex; flex-direction: column; gap: 2px; font-size: 12px; letter-spacing: 0.03em; }
+.gl-swatch__meta b { font-weight: 400; color: var(--gl-swatch-label); }
+
+/* ---------- Pager between guideline pages ---------- */
+.gl-pager { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--border); padding-top: 28px; }
+.btn.gl-pager__link { min-height: 48px; padding: 12px 22px; font-size: 15px; font-weight: 700; border-color: var(--border); }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 900px) {
+  .gl-swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .banner.gl-banner { min-height: 0; padding: 28px 20px 32px; }
+  .gl-banner__hero { display: none; }
+  .gl-banner__kicker { margin-bottom: 18px; }
+  .gl-banner__pills { margin-top: 24px; }
+  .gl-detail { padding: 18px; }
+}
+@media (max-width: 480px) {
+  .gl-traits { grid-template-columns: 1fr; }
+  .gl-swatches { grid-template-columns: 1fr; }
+  .gl-swatch { min-height: 120px; }
+}

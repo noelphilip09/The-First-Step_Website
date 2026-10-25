@@ -1,0 +1,73 @@
+/* Design tokens — lifted from the Design canvas "The First Step — USYD Biophilic Classroom Toolkit".
+   Every colour, radius and size in the app comes from here. Do not hard-code hex values in pages. */
+:root {
+  /* Ground + surfaces */
+  --bg: #FBFAF7;
+  --surface: #FFFFFF;
+  --surface-2: #F4F2EC;
+  --surface-3: #E9EDE8;
+  --border: #E7E4DC;
+  --border-strong: #D9D5CB;
+  --divider: #EDEAE3;
+  --dash: #C9C4B6;
+
+  /* Ink */
+  --text: #1C2420;
+  --muted: #5B645F;
+  --muted-2: #6B746F;
+  --disabled: #A9ADA6;
+
+  /* Brand greens */
+  --primary: #213F36;
+  --primary-hover: #1A332B;
+  --primary-ink: #2F4F45;
+  --primary-soft: #E3EAE6;
+  --link: #2F6663;
+  --focus: #579B96;
+
+  /* Accent (switchable: teal / sage / gold) */
+  --accent: #579B96;
+  --accent-rgb: 87, 155, 150;
+  --accent-deep: #2F6663;
+  --accent-tint: rgba(var(--accent-rgb), 0.16);
+  --accent-soft: rgba(var(--accent-rgb), 0.45);
+  --tile-hover: #C5DEDB;
+  --opt-hover: #8FBFBA;
+
+  /* Status */
+  --status-review-bg: #FBF0D5;  --status-review-fg: #8A5A00;
+  --status-outside-bg: #FBE5E3; --status-outside-fg: #9B2C2C;
+  --status-none-bg: #EDEAE3;    --status-none-fg: #1C2420;
+  --status-within-bg: #D9E9D3;  --status-within-fg: #2B5A3A;
+  --status-notreq-bg: #FCEBD5;  --status-notreq-fg: #9A5A10; --status-notreq-icon: #E8A04A;
+
+  /* CCT slider gradient (warm → cool) */
+  --cct-gradient: linear-gradient(90deg, #F2D9AE 0%, #F9EBD2 30%, #FFFFFF 50%, #E2ECF8 70%, #C3D9F3 100%);
+
+  /* Shape */
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --sidebar-w: 232px;
+  --sidebar-collapsed-w: 72px;
+  --header-h: 64px;
+  --content-pad: 40px;
+  --content-max: 1360px;
+
+  /* Type */
+  --font: "Helvetica Toolkit", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Elevation + motion */
+  --shadow-pop: 0 12px 32px rgba(28, 36, 32, 0.12), 0 1px 2px rgba(28, 36, 32, 0.06);
+  --shadow-lift: 0 8px 24px rgba(28, 36, 32, 0.06);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 240ms;
+}
+
+/* Brand accent options from the design's "Brand" prop */
+:root[data-accent="sage"] { --accent: #91A989; --accent-rgb: 145, 169, 137; --accent-deep: #505D4B; --tile-hover: #CFDCCB; --opt-hover: #A9BDA3; }
+:root[data-accent="gold"] { --accent: #E5C96C; --accent-rgb: 229, 201, 108; --accent-deep: #7E6F3B; --tile-hover: #EFE1AE; --opt-hover: #D9C377; }

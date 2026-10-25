@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design Studio — The First Step</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Helvetica Toolkit";src:url(/_blob/5337a59c21bc8475062e3526852885a4) format("truetype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Helvetica Toolkit";src:url(/_blob/627a52309ea4f2b213dedcabf3dfb035) format("truetype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Helvetica Toolkit";src:url(/_blob/92a99d5c1169fd004e5bb666c2f13cae) format("truetype");font-weight:300;font-style:normal;font-display:swap}
+body{margin:0;background:#FBFAF7;color:#1C2420;font-family:"Helvetica Toolkit","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#2F6663}a:hover{color:#1C2420}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid #579B96;outline-offset:2px}
+.nav a:hover{background:#F4F2EC;color:#1C2420}
+.opt:hover{border-color:#8FBFBA}
+input[type=range]{accent-color:#2F6663}
+input[type=checkbox]{accent-color:#2F6663;width:18px;height:18px}
+.cct{-webkit-appearance:none;appearance:none;width:100%;height:32px;border-radius:999px;margin:0;outline:none;background:linear-gradient(90deg,#F2D9AE 0%,#F9EBD2 30%,#FFFFFF 50%,#E2ECF8 70%,#C3D9F3 100%)}
+.cct::-webkit-slider-runnable-track{height:32px;border-radius:999px;background:transparent}
+.cct::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:2px;border-radius:999px;background:#FFFFFF;border:0;box-shadow:0 2px 6px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.06);cursor:pointer}
+.cct::-moz-range-track{height:32px;border-radius:999px;background:transparent}
+.cct::-moz-range-thumb{width:28px;height:28px;border-radius:999px;background:#FFFFFF;border:0;box-shadow:0 2px 6px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.06);cursor:pointer}
+.cct:focus-visible{outline:2px solid #579B96;outline-offset:3px}
+input.switch{-webkit-appearance:none;appearance:none;width:48px;height:28px;border-radius:999px;background:#C9C4B6;border:0;position:relative;cursor:pointer;margin:0;padding:0;flex:0 0 48px;vertical-align:middle;transition:background-color .2s}
+input.switch::before{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+input.switch:checked{background:#213F36}
+input.switch:checked::before{transform:translateX(20px)}
+input.switch:focus-visible{outline:2px solid #579B96;outline-offset:3px}
+input.tick{-webkit-appearance:none;appearance:none;width:20px;height:20px;border:1.5px solid #D9D5CB;border-radius:5px;background:#FFFFFF;margin:0;padding:0;flex:0 0 20px;cursor:pointer;position:relative}
+input.tick:checked{background:#213F36;border-color:#213F36}
+input.tick:checked::before{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #FFFFFF;border-width:0 2px 2px 0;transform:rotate(45deg)}
+input.tick:focus-visible{outline:2px solid #579B96;outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #FBFAF7; font-size: 14px; line-height: 1.5">
+
+<nav class="nav" aria-label="Main navigation" style="flex: 0 0 232px; background: #FFFFFF; border-right: 1px solid #E7E4DC; display: flex; flex-direction: column; padding: 20px 14px; gap: 28px">
+  <a href="Main.dc.html" aria-label="The First Step, home" style="display: block; padding: 6px 8px 2px">
+    <img src="/_blob/5a7bb1a4fc45738998bb5c530db91512" alt="The First Step — Strategy Initiative" style="width: 100%; max-width: 188px; height: auto; display: block">
+  </a>
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>Classroom Library</a>
+    <a href="Studio.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 700; background: {{accentTint}}; color: {{accentDeep}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"></path><path d="M3 13l9 5 9-5"></path></svg>Design Studio</a>
+    <a href="Lighting.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h8"></path></svg>Design Guidelines</a>
+    <a href="Lighting.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 12px 8px 42px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>Lighting</a>
+    <a href="Plants.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 12px 8px 42px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15z"></path><path d="M5 19l8-8"></path></svg>Plants</a>
+    <a href="Colour.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 8px 12px 8px 42px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-2 0-3 3 0 4-1 1-3 1-5a9 9 0 0 0-7-7z"></path><circle cx="7.5" cy="11.5" r="1"></circle><circle cx="10" cy="7.5" r="1"></circle><circle cx="15" cy="7.5" r="1"></circle></svg>Colour &amp; Material</a>
+    <a href="Impact.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg>Impact &amp; Outcomes</a>
+  </div>
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px">
+    <span aria-hidden="true" style="height: 1px; background: #EDEAE3; margin: 0 4px 6px"></span>
+    <a href="Energy.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"></path></svg>Energy &amp; Savings</a>
+    <a href="Reports.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-size: 14px; color: #5B645F"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 4V3h6v1M9 11h6M9 15h4"></path></svg>Reports</a>
+    <button type="button" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 12px; margin-top: 6px; border-radius: 10px; border: 0; background: transparent; color: #5B645F; font-size: 13px; text-align: left"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Collapse</button>
+  </div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; width: 814px">
+  <header style="background: #FFFFFF; border-bottom: 1px solid #E7E4DC; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 40px; min-height: 64px">
+    <h1 style="margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; flex: 1 1 auto">Design Studio</h1>
+    <span style="font-size: 12px; color: #5B645F">{{savedText}}</span>
+    <button type="button" aria-label="Notifications" style="width: 40px; height: 40px; border-radius: 999px; border: 1px solid #E7E4DC; background: #FFFFFF; display: flex; align-items: center; justify-content: center; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg></button>
+    <button type="button" aria-label="Account, Noel P." style="width: 40px; height: 40px; border-radius: 999px; border: 1px solid #E7E4DC; background: {{accentTint}}; color: {{accentDeep}}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px">NP</button>
+  </header>
+
+  <div style="padding: 32px; display: flex; flex-direction: column; gap: 32px">
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 42px; font-weight: 300; letter-spacing: -0.02em; line-height: 1.08">{{stepTitle}}</h2>
+      <p style="margin: 0; font-size: 16px; color: #5B645F">{{stepHint}}</p>
+    </div>
+
+    <ol aria-label="Steps" style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: {{st1.bg}}; color: {{st1.fg}}; border: 1px solid {{st1.bd}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{st1.dot}}; color: {{st1.dotFg}}; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex: 0 0 28px">{{st1.mark}}</span><span style="font-size: 13px; font-weight: 700">Classroom</span></li>
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: {{st2.bg}}; color: {{st2.fg}}; border: 1px solid {{st2.bd}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{st2.dot}}; color: {{st2.dotFg}}; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex: 0 0 28px">{{st2.mark}}</span><span style="font-size: 13px; font-weight: 700">Conditions</span></li>
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: {{st3.bg}}; color: {{st3.fg}}; border: 1px solid {{st3.bd}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{st3.dot}}; color: {{st3.dotFg}}; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex: 0 0 28px">{{st3.mark}}</span><span style="font-size: 13px; font-weight: 700">Recommendations</span></li>
+      <li style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border-radius: 12px; background: {{st4.bg}}; color: {{st4.fg}}; border: 1px solid {{st4.bd}}"><span style="width: 28px; height: 28px; border-radius: 999px; background: {{st4.dot}}; color: {{st4.dotFg}}; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex: 0 0 28px">{{st4.mark}}</span><span style="font-size: 13px; font-weight: 700">Plan &amp; impact</span></li>
+    </ol>
+
+    <sc-if value="{{submitted}}" hint-placeholder-val="{{false}}">
+      <div role="status" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid {{accent}}"><span style="width: 32px; height: 32px; border-radius: 999px; background: {{accentTint}}; color: {{accentDeep}}; display: flex; align-items: center; justify-content: center; flex: 0 0 32px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span><span style="font-size: 14px"><strong>Submitted for review</strong> · {{exceptionCount}} item(s) for a reviewer · <a href="Reports.dc.html">Track it in Reports</a></span></div>
+    </sc-if>
+
+    <sc-if value="{{isStep1}}" hint-placeholder-val="{{true}}">
+      <section aria-label="Choose a classroom" style="display: flex; flex-direction: column; gap: 20px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px">
+          <button type="button" class="opt" aria-pressed="{{r.sr01.on}}" onClick="{{r.sr01.pick}}" style="display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 16px; border: 2px solid {{r.sr01.bd}}; background: {{r.sr01.bg}}; text-align: left; min-height: 96px"><span style="width: 56px; height: 56px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E7E4DC; display: flex; align-items: center; justify-content: center; color: #213F36; flex: 0 0 56px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="12" rx="7" ry="4"></ellipse><circle cx="12" cy="4.5" r="1.5"></circle><circle cx="12" cy="19.5" r="1.5"></circle><circle cx="4" cy="8" r="1.5"></circle><circle cx="20" cy="8" r="1.5"></circle><circle cx="4" cy="16" r="1.5"></circle><circle cx="20" cy="16" r="1.5"></circle></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; font-weight: 700">Seminar Room 01</span><span style="font-size: 12px; color: #5B645F">Teaching Block A · 58 m² · fluorescent, low daylight</span></span><span style="width: 24px; height: 24px; border-radius: 999px; background: {{r.sr01.dot}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+          <button type="button" class="opt" aria-pressed="{{r.clb04.on}}" onClick="{{r.clb04.pick}}" style="display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 16px; border: 2px solid {{r.clb04.bd}}; background: {{r.clb04.bg}}; text-align: left; min-height: 96px"><span style="width: 56px; height: 56px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E7E4DC; display: flex; align-items: center; justify-content: center; color: #213F36; flex: 0 0 56px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8M12 16v4"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; font-weight: 700">Computer Lab B04</span><span style="font-size: 12px; color: #5B645F">Science Building · 92 m² · LED, screen glare</span></span><span style="width: 24px; height: 24px; border-radius: 999px; background: {{r.clb04.dot}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+          <button type="button" class="opt" aria-pressed="{{r.st214.on}}" onClick="{{r.st214.pick}}" style="display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 16px; border: 2px solid {{r.st214.bd}}; background: {{r.st214.bg}}; text-align: left; min-height: 96px"><span style="width: 56px; height: 56px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E7E4DC; display: flex; align-items: center; justify-content: center; color: #213F36; flex: 0 0 56px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M12 4v16M3 12h18"></path><circle cx="16.5" cy="8" r="1.8"></circle></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; font-weight: 700">Studio 2.14</span><span style="font-size: 12px; color: #5B645F">Design Building · 120 m² · LED, strong daylight</span></span><span style="width: 24px; height: 24px; border-radius: 999px; background: {{r.st214.dot}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+          <button type="button" class="opt" aria-pressed="{{r.gs07.on}}" onClick="{{r.gs07.pick}}" style="display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 16px; border: 2px solid {{r.gs07.bd}}; background: {{r.gs07.bg}}; text-align: left; min-height: 96px"><span style="width: 56px; height: 56px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E7E4DC; display: flex; align-items: center; justify-content: center; color: #213F36; flex: 0 0 56px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15z"></path><path d="M5 19l8-8"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; font-weight: 700">Group Study 07</span><span style="font-size: 12px; color: #5B645F">Library Annex · 45 m² · LED dimmable, good daylight</span></span><span style="width: 24px; height: 24px; border-radius: 999px; background: {{r.gs07.dot}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+          <button type="button" class="opt" aria-pressed="{{r.tr305.on}}" onClick="{{r.tr305.pick}}" style="display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 16px; border: 2px solid {{r.tr305.bd}}; background: {{r.tr305.bg}}; text-align: left; min-height: 96px"><span style="width: 56px; height: 56px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E7E4DC; display: flex; align-items: center; justify-content: center; color: #213F36; flex: 0 0 56px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="5" width="12" height="14" rx="1.5"></rect><path d="M2 12h3M19 12h3"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; font-weight: 700">Tutorial Room 3.05</span><span style="font-size: 12px; color: #5B645F">Teaching Block A · 32 m² · compact, fluorescent</span></span><span style="width: 24px; height: 24px; border-radius: 999px; background: {{r.tr305.dot}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+          <button type="button" class="opt" aria-pressed="{{r.lt110.on}}" onClick="{{r.lt110.pick}}" style="display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 16px; border: 2px solid {{r.lt110.bd}}; background: {{r.lt110.bg}}; text-align: left; min-height: 96px"><span style="width: 56px; height: 56px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E7E4DC; display: flex; align-items: center; justify-content: center; color: #213F36; flex: 0 0 56px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M8.5 5v14M15.5 5v14"></path></svg></span><span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; font-weight: 700">Lecture Room 1.10</span><span style="font-size: 12px; color: #5B645F">Science Building · 180 m² · large, mixed lighting</span></span><span style="width: 24px; height: 24px; border-radius: 999px; background: {{r.lt110.dot}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+          <a href="Main.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; color: #1C2420; text-decoration: none; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>Start from a classroom type instead</a>
+          <button type="button" onClick="{{next}}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 999px; border: 0; background: #213F36; color: #FFFFFF; font-size: 15px; font-weight: 700">Next: conditions<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isStep2}}" hint-placeholder-val="{{false}}">
+      <section aria-label="Room conditions" style="display: flex; flex-direction: column; gap: 14px">
+        <div style="display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center">
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>Daylight</span>
+          <button type="button" class="opt" aria-pressed="{{o.daylight_low.on}}" onClick="{{o.daylight_low.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.daylight_low.bd}}; background: {{o.daylight_low.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle></svg>Low</button>
+          <button type="button" class="opt" aria-pressed="{{o.daylight_medium.on}}" onClick="{{o.daylight_medium.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.daylight_medium.bd}}; background: {{o.daylight_medium.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>Medium</button>
+          <button type="button" class="opt" aria-pressed="{{o.daylight_strong.on}}" onClick="{{o.daylight_strong.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.daylight_strong.bd}}; background: {{o.daylight_strong.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>Strong</button>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center">
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"></path></svg>Lighting</span>
+          <button type="button" class="opt" aria-pressed="{{o.lighting_fluorescent.on}}" onClick="{{o.lighting_fluorescent.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.lighting_fluorescent.bd}}; background: {{o.lighting_fluorescent.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="9" width="18" height="6" rx="3"></rect></svg>Fluorescent</button>
+          <button type="button" class="opt" aria-pressed="{{o.lighting_ledfixed.on}}" onClick="{{o.lighting_ledfixed.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.lighting_ledfixed.bd}}; background: {{o.lighting_ledfixed.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg>LED, fixed</button>
+          <button type="button" class="opt" aria-pressed="{{o.lighting_leddim.on}}" onClick="{{o.lighting_leddim.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.lighting_leddim.bd}}; background: {{o.lighting_leddim.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M8 16l8-8"></path></svg>LED, dimmable</button>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center">
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18L15 6M8 18L20 6" stroke-dasharray="3 3"></path><circle cx="18" cy="6" r="2.5"></circle></svg>Glare</span>
+          <button type="button" class="opt" aria-pressed="{{o.glare_none.on}}" onClick="{{o.glare_none.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.glare_none.bd}}; background: {{o.glare_none.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">None</button>
+          <button type="button" class="opt" aria-pressed="{{o.glare_some.on}}" onClick="{{o.glare_some.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.glare_some.bd}}; background: {{o.glare_some.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Some</button>
+          <button type="button" class="opt" aria-pressed="{{o.glare_strong.on}}" onClick="{{o.glare_strong.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.glare_strong.bd}}; background: {{o.glare_strong.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Strong</button>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center">
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15z"></path><path d="M5 19l8-8"></path></svg>Plants</span>
+          <button type="button" class="opt" aria-pressed="{{o.plants_none.on}}" onClick="{{o.plants_none.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.plants_none.bd}}; background: {{o.plants_none.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">None</button>
+          <button type="button" class="opt" aria-pressed="{{o.plants_some.on}}" onClick="{{o.plants_some.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.plants_some.bd}}; background: {{o.plants_some.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">A few</button>
+          <button type="button" class="opt" aria-pressed="{{o.plants_plenty.on}}" onClick="{{o.plants_plenty.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.plants_plenty.bd}}; background: {{o.plants_plenty.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Plenty</button>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center">
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-2 0-3 3 0 4-1 1-3 1-5a9 9 0 0 0-7-7z"></path><circle cx="7.5" cy="11.5" r="1"></circle><circle cx="10" cy="7.5" r="1"></circle><circle cx="15" cy="7.5" r="1"></circle></svg>Walls</span>
+          <button type="button" class="opt" aria-pressed="{{o.walls_glossy.on}}" onClick="{{o.walls_glossy.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.walls_glossy.bd}}; background: {{o.walls_glossy.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Glossy</button>
+          <button type="button" class="opt" aria-pressed="{{o.walls_matt.on}}" onClick="{{o.walls_matt.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.walls_matt.bd}}; background: {{o.walls_matt.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Matt</button>
+          <span></span>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center">
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"></path></svg>Size</span>
+          <button type="button" class="opt" aria-pressed="{{o.size_compact.on}}" onClick="{{o.size_compact.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.size_compact.bd}}; background: {{o.size_compact.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Compact</button>
+          <button type="button" class="opt" aria-pressed="{{o.size_standard.on}}" onClick="{{o.size_standard.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.size_standard.bd}}; background: {{o.size_standard.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Standard</button>
+          <button type="button" class="opt" aria-pressed="{{o.size_large.on}}" onClick="{{o.size_large.pick}}" style="min-height: 64px; border-radius: 14px; border: 2px solid {{o.size_large.bd}}; background: {{o.size_large.bg}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: #1C2420">Large</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 10px">
+          <button type="button" onClick="{{back}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back</button>
+          <span style="font-size: 12px; color: #5B645F">Pre-filled from the classroom record · tap to change · a photograph can be added later</span>
+          <button type="button" onClick="{{next}}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 999px; border: 0; background: #213F36; color: #FFFFFF; font-size: 15px; font-weight: 700">Generate recommendations<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isStep3}}" hint-placeholder-val="{{false}}">
+      <section aria-label="Recommendations" style="display: flex; flex-direction: column; gap: 20px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; align-items: start">
+
+          <article aria-labelledby="light-h" style="position: relative; overflow: hidden; background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px; height: 100%">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+              <span style="width: 48px; height: 48px; border-radius: 999px; background: #E3EAE6; color: #2F4F45; display: flex; align-items: center; justify-content: center; flex: 0 0 48px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"></path></svg></span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 5px 12px 5px 8px; border-radius: 999px; background: {{lightStatus.bg}}; color: {{lightStatus.fg}}"><sc-if value="{{lightWithin}}" hint-placeholder-val="{{true}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="{{lightStatus.fg}}"></circle><path d="M7.5 12.5l3 3 6-6" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if><sc-if value="{{lightNotWithin}}" hint-placeholder-val="{{false}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v4M12 18h.01"></path></svg></sc-if>{{lightStatus.label}}</span>
+            </div>
+            <div style="position: relative; display: flex; flex-direction: column; gap: 8px">
+              <h3 id="light-h" style="margin: 0; font-size: 12px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: #6B746F">Lighting</h3>
+              <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; text-wrap: pretty; max-width: 62%">{{lightHeadline}}</span>
+              <a href="Lighting.dc.html" style="font-size: 14px; color: #5B645F; text-decoration: none; align-self: flex-start">Check lighting guidelines</a>
+              <img src="/_blob/ca9d4b151025734e6e5a73bd3d61ca5c" alt="Rectangular LED pendant fitting with a diffused light panel" style="position: absolute; right: -39px; top: -13px; width: 165px; max-width: 200px; height: 156px; object-fit: contain; pointer-events: none">
+            </div>
+            <sc-if value="{{glareFirst}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: #FBF0D5; color: #8A5A00"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18L15 6M8 18L20 6"></path></svg>Glare first · diffusers and blinds</span></sc-if>
+            <div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border-radius: 14px; background: #F6F5F1">
+              <label for="s-cct" style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><span style="font-size: 14px">Default colour temperature</span><strong style="font-size: 19px; letter-spacing: -0.01em">{{cct}}K</strong></label>
+              <input id="s-cct" class="cct" type="range" min="2200" max="5500" step="100" value="{{cct}}" onChange="{{setCct}}" aria-valuetext="{{cct}} kelvin, {{cctHint}}">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; color: #5B645F"><span>2700–3000K • calm</span><span>3500–4000K • task</span></div>
+              <span style="font-size: 14px; color: {{cctHintFg}}">{{cctHint}}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px; padding: 14px 0 12px; border-top: 1px solid #E7E4DC">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1C2420" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h8M18 7h2M4 12h2M11 12h9M4 17h10M19 17h1"></path><circle cx="15" cy="7" r="2.2" fill="#FFFFFF"></circle><circle cx="8" cy="12" r="2.2" fill="#FFFFFF"></circle><circle cx="16.5" cy="17" r="2.2" fill="#FFFFFF"></circle></svg>
+              <span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span id="s-dim-label" style="font-size: 16px; line-height: 1.3">Dimming &amp; Scenes</span><span style="font-size: 12px; color: #5B645F">Adjustable lighting with preset scenes</span></span>
+              <button id="s-dim" type="button" role="switch" aria-checked="{{dimmingOn}}" aria-labelledby="s-dim-label" onClick="{{toggleDimming}}" style="width: 48px; height: 28px; border-radius: 999px; border: 0; padding: 0; background: {{dimBg}}; position: relative; flex: 0 0 48px; cursor: pointer; transition: background-color 0.2s"><span style="position: absolute; top: 3px; left: {{dimKnob}}; width: 22px; height: 22px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: left 0.2s"></span></button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px; padding-top: 14px; border-top: 1px solid #E7E4DC">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1C2420" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M9 4v16M15 4v16"></path></svg>
+              <span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 16px; line-height: 1.3">Lighting Zones</span><span style="font-size: 12px; color: #5B645F">Separate control for different activities</span></span>
+              <div role="group" aria-label="Lighting zones" style="display: flex; border: 1px solid #D9D5CB; border-radius: 12px; overflow: hidden; flex: 0 0 auto">
+                <button type="button" aria-pressed="{{z1.on}}" onClick="{{z1.pick}}" style="width: 36px; height: 36px; border: 0; border-right: 1px solid #D9D5CB; background: {{z1.segBg}}; color: {{z1.segFg}}; font-size: 14px">1</button>
+                <button type="button" aria-pressed="{{z2.on}}" onClick="{{z2.pick}}" style="width: 36px; height: 36px; border: 0; border-right: 1px solid #D9D5CB; background: {{z2.segBg}}; color: {{z2.segFg}}; font-size: 14px">2</button>
+                <button type="button" aria-pressed="{{z3.on}}" onClick="{{z3.pick}}" style="width: 36px; height: 36px; border: 0; background: {{z3.segBg}}; color: {{z3.segFg}}; font-size: 14px">3</button>
+              </div>
+            </div>
+          </article>
+
+          <article aria-labelledby="plant-h" style="position: relative; overflow: hidden; background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px; height: 100%">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+              <span style="width: 48px; height: 48px; border-radius: 999px; background: #E3EAE6; color: #2F4F45; display: flex; align-items: center; justify-content: center; flex: 0 0 48px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18c0-8 5-12 12-12 0 7-4 12-12 12z"></path><path d="M6 18c3-4 6-7 9-9"></path></svg></span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 5px 12px 5px 8px; border-radius: 999px; background: {{plantStatus.bg}}; color: {{plantStatus.fg}}"><sc-if value="{{plantWithin}}" hint-placeholder-val="{{true}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="{{plantStatus.fg}}"></circle><path d="M7.5 12.5l3 3 6-6" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if><sc-if value="{{plantNotWithin}}" hint-placeholder-val="{{false}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v4M12 18h.01"></path></svg></sc-if>{{plantStatus.label}}</span>
+            </div>
+            <div style="position: relative; display: flex; flex-direction: row; gap: 8px; min-height: 112px">
+              <div data-dc-group="" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; justify-content: normal; align-items: normal"><h3 id="plant-h" style="margin: 0; font-size: 12px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: #6B746F">Plants</h3><div data-dc-group="" style="box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; justify-content: normal; align-items: normal; width: 229px"><span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; display: flex; flex-direction: column"><span style="white-space: nowrap">{{plantHeadline1}}</span><span style="white-space: nowrap">{{plantHeadline2}}</span></span><a href="Plants.dc.html" style="font-size: 14px; color: #5B645F; text-decoration: none; align-self: flex-start">Check plant guidelines</a></div></div>
+              
+              
+              
+            <img src="/_blob/64b2f7df45ab1158dedd3819573c5212" alt="image" width="206" height="238" style="max-width: 100%; height: 122px; display: block; object-fit: cover; width: 134px; aspect-ratio: 206 / 238"></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr); gap: 0 14px; padding: 16px; border-radius: 14px; background: #F6F5F1">
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <span style="display: flex; align-items: center; gap: 8px; font-size: 14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F6B4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h12l-1.5 10h-9z"></path><path d="M12 11V8"></path><path d="M12 8c-3 0-5-1.8-5-4 3 0 5 1.8 5 4zM12 8c3 0 5-1.8 5-4-3 0-5 1.8-5 4z"></path></svg>Number of Plants</span>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px"><button type="button" aria-label="Fewer plants" onClick="{{fewer}}" style="width: 40px; height: 40px; border-radius: 999px; border: 0; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C2420" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span style="min-width: 30px; text-align: center; font-size: 26px; font-weight: 700; letter-spacing: -0.02em">{{plantCount}}</span><button type="button" aria-label="More plants" onClick="{{more}}" style="width: 40px; height: 40px; border-radius: 999px; border: 0; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1C2420" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button></div>
+              </div>
+              <div style="background: #D9D5CB"></div>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <span style="display: flex; align-items: center; gap: 8px; font-size: 14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F6B4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"></rect><path d="M3 12h18M12 3v9M12 12v4h5v5"></path></svg>Floor Coverage</span>
+                <span style="display: flex; align-items: baseline; justify-content: center; gap: 6px; min-height: 40px"><strong style="font-size: 26px; letter-spacing: -0.02em">{{coveragePct}}</strong><span style="font-size: 13px; color: #5B645F">of {{roomArea}} m²</span></span>
+              </div>
+            </div>
+            <div style="border-top: 1px solid #E7E4DC"></div>
+            <div role="group" aria-label="Species" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+              <button type="button" aria-pressed="{{sp.zz.on}}" onClick="{{sp.zz.pick}}" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid {{sp.zz.tileBd}}; border-radius: 12px; background: #FFFFFF; min-height: 56px; width: 100%; text-align: left; color: #1C2420; font: inherit; cursor: pointer"><img src="/_blob/935b2fc5bab01180c9b24231c218337f" alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex: 0 0 38px"><span style="flex: 1 1 auto; font-size: 15px">ZZ Plant</span><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid {{sp.zz.tickBd}}; background: {{sp.zz.tickBg}}; display: flex; align-items: center; justify-content: center; flex: 0 0 20px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{sp.zz.tickFg}}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+              <button type="button" aria-pressed="{{sp.cast.on}}" onClick="{{sp.cast.pick}}" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid {{sp.cast.tileBd}}; border-radius: 12px; background: #FFFFFF; min-height: 56px; width: 100%; text-align: left; color: #1C2420; font: inherit; cursor: pointer"><img src="/_blob/7f125dfb33fcded3fbd98e04d8f4b0b4" alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex: 0 0 38px"><span style="flex: 1 1 auto; font-size: 15px">Cast-iron</span><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid {{sp.cast.tickBd}}; background: {{sp.cast.tickBg}}; display: flex; align-items: center; justify-content: center; flex: 0 0 20px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{sp.cast.tickFg}}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+              <button type="button" aria-pressed="{{sp.pothos.on}}" onClick="{{sp.pothos.pick}}" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid {{sp.pothos.tileBd}}; border-radius: 12px; background: #FFFFFF; min-height: 56px; width: 100%; text-align: left; color: #1C2420; font: inherit; cursor: pointer"><img src="/_blob/42db230c7a6b3a22c3f9d8395727f8cd" alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex: 0 0 38px"><span style="flex: 1 1 auto; font-size: 15px">Pothos</span><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid {{sp.pothos.tickBd}}; background: {{sp.pothos.tickBg}}; display: flex; align-items: center; justify-content: center; flex: 0 0 20px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{sp.pothos.tickFg}}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+              <button type="button" aria-pressed="{{sp.pep.on}}" onClick="{{sp.pep.pick}}" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid {{sp.pep.tileBd}}; border-radius: 12px; background: #FFFFFF; min-height: 56px; width: 100%; text-align: left; color: #1C2420; font: inherit; cursor: pointer"><img src="/_blob/c35a9fcd517829d6718547f67efa923e" alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex: 0 0 38px"><span style="flex: 1 1 auto; font-size: 15px">Peperomia</span><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid {{sp.pep.tickBd}}; background: {{sp.pep.tickBg}}; display: flex; align-items: center; justify-content: center; flex: 0 0 20px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{sp.pep.tickFg}}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+              <button type="button" aria-pressed="{{sp.spider.on}}" onClick="{{sp.spider.pick}}" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid {{sp.spider.tileBd}}; border-radius: 12px; background: #FFFFFF; min-height: 56px; width: 100%; text-align: left; color: #1C2420; font: inherit; cursor: pointer"><img src="/_blob/bc5358c12cb7e94f2c3c698e825b60b0" alt="" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex: 0 0 38px"><span style="flex: 1 1 auto; font-size: 15px">Spider plant</span><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid {{sp.spider.tickBd}}; background: {{sp.spider.tickBg}}; display: flex; align-items: center; justify-content: center; flex: 0 0 20px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{sp.spider.tickFg}}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+            </div>
+            <span style="font-size: 15px; color: #2F6663">{{speciesNote}}</span>
+          </article>
+
+          <article aria-labelledby="colour-h" style="position: relative; overflow: hidden; background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; gap: 14px; height: 100%">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+              <span style="width: 48px; height: 48px; border-radius: 999px; background: #E3EAE6; color: #2F4F45; display: flex; align-items: center; justify-content: center; flex: 0 0 48px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-2 0-3 3 0 4-1 1-3 1-5a9 9 0 0 0-7-7z"></path><circle cx="7.5" cy="11.5" r="1.2"></circle><circle cx="10" cy="7.5" r="1.2"></circle><circle cx="15" cy="7.5" r="1.2"></circle></svg></span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 5px 12px 5px 8px; border-radius: 999px; background: {{colourStatus.bg}}; color: {{colourStatus.fg}}"><sc-if value="{{colourNone}}" hint-placeholder-val="{{true}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="{{colourStatus.icon}}"></circle><path d="M8 12h8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"></path></svg></sc-if><sc-if value="{{colourWithin}}" hint-placeholder-val="{{false}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="{{colourStatus.fg}}"></circle><path d="M7.5 12.5l3 3 6-6" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></sc-if><sc-if value="{{colourFlag}}" hint-placeholder-val="{{false}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v4M12 18h.01"></path></svg></sc-if>{{colourStatus.label}}</span>
+            </div>
+            <div style="position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 124px">
+              <h3 id="colour-h" style="margin: 0; font-size: 12px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: #6B746F">Colour &amp; Finish</h3>
+              <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; text-wrap: pretty; max-width: 58%">{{colourHeadline}}</span>
+              <a href="Colour.dc.html" style="font-size: 14px; color: #5B645F; text-decoration: none; align-self: flex-start">Check colour guidelines</a>
+              <img src="/_blob/f72eafd21fca8d8266655e10f7a02f68" alt="Isometric illustration of a classroom with desks, a whiteboard and a window" style="position: absolute; right: -33px; top: -11px; width: 138px; max-width: 160px; height: 129px; object-fit: contain; pointer-events: none">
+            </div>
+            <div role="group" aria-label="Palette" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+              <button type="button" aria-pressed="{{pl.calm.on}}" onClick="{{pl.calm.pick}}" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 8px; border-radius: 16px; border: 2px solid {{pl.calm.tileBd}}; background: #FFFFFF"><span style="display: flex; width: 76px; max-width: 100%; height: 54px; border-radius: 12px; overflow: hidden"><span style="flex: 1 1 0; background: #F6F2E9"></span><span style="flex: 1 1 0; background: #C9D3C4"></span><span style="flex: 1 1 0; background: #DCCFB6"></span></span><span style="font-size: 14px; font-weight: {{pl.calm.fw}}">Calm Study</span></button>
+              <button type="button" aria-pressed="{{pl.warm.on}}" onClick="{{pl.warm.pick}}" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 8px; border-radius: 16px; border: 2px solid {{pl.warm.tileBd}}; background: #FFFFFF"><span style="display: flex; width: 76px; max-width: 100%; height: 54px; border-radius: 12px; overflow: hidden"><span style="flex: 1 1 0; background: #F7F3EA"></span><span style="flex: 1 1 0; background: #E3D6C0"></span><span style="flex: 1 1 0; background: #C8B08E"></span></span><span style="font-size: 14px; font-weight: {{pl.warm.fw}}">Warm Neutral</span></button>
+              <button type="button" aria-pressed="{{pl.horizon.on}}" onClick="{{pl.horizon.pick}}" style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 8px; border-radius: 16px; border: 2px solid {{pl.horizon.tileBd}}; background: #FFFFFF"><span style="display: flex; width: 76px; max-width: 100%; height: 54px; border-radius: 12px; overflow: hidden"><span style="flex: 1 1 0; background: #F5F4EF"></span><span style="flex: 1 1 0; background: #CBD5DA"></span><span style="flex: 1 1 0; background: #A9B9C2"></span></span><span style="font-size: 14px; font-weight: {{pl.horizon.fw}}">Soft Horizon</span></button>
+            </div>
+            <button type="button" aria-pressed="{{noChangeOn}}" onClick="{{toggleNoChange}}" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid {{noChangeBd}}; border-radius: 12px; background: {{noChangeBg}}; min-height: 52px; width: 100%; text-align: left; color: #1C2420; font: inherit; cursor: pointer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C2420" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="13" height="6" rx="1.5"></rect><path d="M16 7h3v4h-8v3"></path><path d="M9 14h4v6H9z"></path><circle cx="18.5" cy="18.5" r="3.5" fill="#1C2420" stroke="none"></circle><path d="M16.5 18.5h4" stroke="#FFFFFF" stroke-width="1.6"></path></svg><span style="flex: 1 1 auto; font-size: 15px">No Changes Required</span><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid {{nc.tickBd}}; background: {{nc.tickBg}}; display: flex; align-items: center; justify-content: center; flex: 0 0 20px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{nc.tickFg}}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"></path></svg></span></button>
+            <div style="border-top: 1px solid #E7E4DC"></div>
+            <div role="group" aria-label="Wall finish" style="display: flex; flex-wrap: wrap; gap: 10px; opacity: {{finishOpacity}}; transition: opacity 150ms ease">
+              <button type="button" aria-pressed="{{fn.lowsheen.on}}" onClick="{{fn.lowsheen.pick}}" style="min-height: 44px; padding: 10px 24px; border-radius: 999px; border: 2px solid {{fn.lowsheen.chipBd}}; background: {{fn.lowsheen.chipBg}}; font-size: 15px">Low sheen</button>
+              <button type="button" aria-pressed="{{fn.matt.on}}" onClick="{{fn.matt.pick}}" style="min-height: 44px; padding: 10px 24px; border-radius: 999px; border: 2px solid {{fn.matt.chipBd}}; background: {{fn.matt.chipBg}}; font-size: 15px">Matt</button>
+              <button type="button" aria-pressed="{{fn.eggshell.on}}" onClick="{{fn.eggshell.pick}}" style="min-height: 44px; padding: 10px 24px; border-radius: 999px; border: 2px solid {{fn.eggshell.chipBd}}; background: {{fn.eggshell.chipBg}}; font-size: 15px">Eggshell</button>
+              <button type="button" aria-pressed="{{fn.semigloss.on}}" onClick="{{fn.semigloss.pick}}" style="min-height: 44px; padding: 10px 24px; border-radius: 999px; border: 2px solid {{fn.semigloss.chipBd}}; background: {{fn.semigloss.chipBg}}; font-size: 15px">Semi-Gloss</button>
+            </div>
+            <span style="font-size: 15px; color: #2F6663">{{finishNote}}</span>
+          </article>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+          <button type="button" onClick="{{back}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 14px; height: 48px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back</button>
+          <div data-dc-group="" style="box-sizing: border-box; display: flex; flex-direction: row; gap: 12px; justify-content: space-between; align-items: center"><button type="button" onClick="{{resetRecs}}" style="min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 14px; padding-right: 22px; padding-left: 22px; height: 48px">Reset to recommended</button><button type="button" onClick="{{next}}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 999px; border: 0; background: #213F36; color: #FFFFFF; font-size: 15px; font-weight: 700">See plan and impact<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button></div>
+          
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isStep4}}" hint-placeholder-val="{{false}}">
+      <section aria-label="Plan and impact" style="display: flex; flex-direction: column; gap: 20px">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+          <div style="flex: 1 1 480px; min-width: 0; background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px"><span style="font-size: 14px; font-weight: 700">{{roomName}} · plan view</span><div style="display: flex; gap: 6px"><button type="button" style="display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 12px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"></path></svg>Photo</button><button type="button" style="display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 12px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"></path></svg>Floor plan</button></div></div>
+            <div style="overflow-x: auto">
+              <div style="position: relative; width: 480px; height: 400px; margin: 0 auto; background: #FBFAF7; border-radius: 12px">
+                <div style="position: absolute; left: 20px; top: 20px; width: 440px; height: 360px; border: 2px solid #213F36; background-color: #FFFFFF; background-image: linear-gradient(#EDEAE3 1px, transparent 1px), linear-gradient(90deg, #EDEAE3 1px, transparent 1px); background-size: 52px 52px" role="img" aria-label="Plan view: whiteboard wall at top, window on the left, door bottom right, desks, proposed LED fittings and plant positions">
+                  <div style="position: absolute; left: 110px; top: -2px; width: 220px; height: 8px; background: #1C2420; border-radius: 0 0 3px 3px"></div>
+                  <div style="position: absolute; left: -2px; top: 100px; width: 8px; height: 160px; background: {{accentSoft}}; border-radius: 0 3px 3px 0"></div>
+                  <div style="position: absolute; left: 360px; top: 306px; width: 50px; height: 50px; border-left: 1.5px solid #5B645F; border-bottom: 1.5px solid #5B645F; border-radius: 0 0 0 100%"></div>
+                  <div style="position: absolute; left: 360px; top: 356px; width: 50px; height: 4px; background: #FBFAF7"></div>
+                  <div style="position: absolute; left: 120px; top: 96px; width: 100px; height: 48px; border-radius: 4px; background: #EDEAE3; border: 1px solid #D9D5CB"></div>
+                  <div style="position: absolute; left: 250px; top: 96px; width: 100px; height: 48px; border-radius: 4px; background: #EDEAE3; border: 1px solid #D9D5CB"></div>
+                  <div style="position: absolute; left: 120px; top: 176px; width: 100px; height: 48px; border-radius: 4px; background: #EDEAE3; border: 1px solid #D9D5CB"></div>
+                  <div style="position: absolute; left: 250px; top: 176px; width: 100px; height: 48px; border-radius: 4px; background: #EDEAE3; border: 1px solid #D9D5CB"></div>
+                  <div style="position: absolute; left: 120px; top: 256px; width: 100px; height: 48px; border-radius: 4px; background: #EDEAE3; border: 1px solid #D9D5CB"></div>
+                  <div style="position: absolute; left: 250px; top: 256px; width: 100px; height: 48px; border-radius: 4px; background: #EDEAE3; border: 1px solid #D9D5CB"></div>
+                  <sc-for list="{{fittings}}" as="f" hint-placeholder-count="12">
+                    <div style="position: absolute; left: {{f.x}}px; top: {{f.y}}px; width: 40px; height: 40px; border-radius: 4px; background: {{f.bg}}; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px {{f.ring}}"></div>
+                  </sc-for>
+                  <sc-for list="{{plantDots}}" as="p" hint-placeholder-count="8">
+                    <div style="position: absolute; left: {{p.x}}px; top: {{p.y}}px; width: 24px; height: 24px; border-radius: 999px; background: #213F36; border: 2px solid #FFFFFF; box-shadow: 0 0 0 1px #213F36"></div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #5B645F">
+              <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 3px; background: {{accent}}"></span>{{fittingLegend}}</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 3px; background: {{accentSoft}}"></span>Other zones</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 999px; background: #213F36"></span>Plant · {{plantsDrawn}}</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 14px; height: 14px; border-radius: 3px; background: #EDEAE3; border: 1px solid #D9D5CB"></span>Desk</span>
+            </div>
+          </div>
+
+          <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+              <div style="background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.5"></circle></svg>Investment</span><span style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em">A${{totalText}}</span><span style="font-size: 11px; color: #5B645F">Illustrative estimate</span></div>
+              <div style="background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"></path></svg>Energy saved</span><span style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em">{{savingKwhText}}</span><span style="font-size: 11px; color: #5B645F">kWh per year · modelled</span></div>
+              <div style="background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"></path><path d="M14 7h7v7"></path></svg>Cost saved</span><span style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em">A${{savingCostText}}</span><span style="font-size: 11px; color: #5B645F">per year at A$0.30/kWh</span></div>
+              <div style="background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #5B645F"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Payback</span><span style="font-size: 26px; font-weight: 700; letter-spacing: -0.02em">{{paybackText}}</span><span style="font-size: 11px; color: #5B645F">{{paybackNote}}</span></div>
+            </div>
+            <div style="background: #FFFFFF; border: 1px solid #E7E4DC; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font-size: 13px; font-weight: 700">Plan summary</span><span style="font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: {{planStatus.bg}}; color: {{planStatus.fg}}">{{planStatus.label}}</span></div>
+              <dl style="margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 13px">
+                <div style="display: flex; justify-content: space-between; gap: 10px"><dt style="display: flex; align-items: center; gap: 8px; color: #5B645F"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>{{lightLine}}</dt><dd style="margin: 0; font-variant-numeric: tabular-nums">A${{lightCostText}}</dd></div>
+                <div style="display: flex; justify-content: space-between; gap: 10px"><dt style="display: flex; align-items: center; gap: 8px; color: #5B645F"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15z"></path><path d="M5 19l8-8"></path></svg>{{plantLine}}</dt><dd style="margin: 0; font-variant-numeric: tabular-nums">A${{plantCostText}}</dd></div>
+                <div style="display: flex; justify-content: space-between; gap: 10px"><dt style="display: flex; align-items: center; gap: 8px; color: #5B645F"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-2 0-3 3 0 4-1 1-3 1-5a9 9 0 0 0-7-7z"></path></svg>{{colourLine}}</dt><dd style="margin: 0; font-variant-numeric: tabular-nums">A${{paintCostText}}</dd></div>
+              </dl>
+              <span style="font-size: 12px; color: #5B645F">{{verifyLine}}</span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+          <button type="button" onClick="{{back}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back</button>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px">
+            <button type="button" onClick="{{save}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"></path><path d="M8 4v5h7V4M8 20v-6h8v6"></path></svg>Save draft</button>
+            <a href="Reports.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #D9D5CB; background: #FFFFFF; color: #1C2420; text-decoration: none; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"></path></svg>Export</a>
+            <button type="button" onClick="{{submit}}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; border-radius: 999px; border: 0; background: #213F36; color: #FFFFFF; font-size: 15px; font-weight: 700">Submit for review<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#579B96","options":["#579B96","#91A989","#E5C96C"],"section":"Brand"},"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.rooms = {
+      sr01: { name: 'Seminar Room 01', area: 58, cond: { daylight: 'low', lighting: 'fluorescent', glare: 'none', plants: 'none', walls: 'glossy', size: 'standard' } },
+      clb04: { name: 'Computer Lab B04', area: 92, cond: { daylight: 'low', lighting: 'ledfixed', glare: 'some', plants: 'none', walls: 'matt', size: 'large' } },
+      st214: { name: 'Studio 2.14', area: 120, cond: { daylight: 'strong', lighting: 'ledfixed', glare: 'strong', plants: 'some', walls: 'glossy', size: 'large' } },
+      gs07: { name: 'Group Study 07', area: 45, cond: { daylight: 'medium', lighting: 'leddim', glare: 'none', plants: 'some', walls: 'matt', size: 'standard' } },
+      tr305: { name: 'Tutorial Room 3.05', area: 32, cond: { daylight: 'medium', lighting: 'fluorescent', glare: 'none', plants: 'none', walls: 'matt', size: 'compact' } },
+      lt110: { name: 'Lecture Room 1.10', area: 180, cond: { daylight: 'low', lighting: 'fluorescent', glare: 'none', plants: 'none', walls: 'matt', size: 'large' } }
+    };
+    this.state = Object.assign({ step: 1, room: 'sr01', submitted: false, savedText: 'Draft · not yet saved' }, this.recsFor(this.rooms.sr01.cond), { cond: Object.assign({}, this.rooms.sr01.cond) });
+    const pre = this.takeHandover();
+    if (pre && this.rooms[pre]) {
+      const cond = Object.assign({}, this.rooms[pre].cond);
+      this.state = Object.assign(this.state, { room: pre, cond, step: 2 }, this.recsFor(cond));
+    }
+  }
+  takeHandover() {
+    let v = '';
+    try { v = localStorage.getItem('firststep.room') || ''; if (v) localStorage.removeItem('firststep.room'); } catch (e) {}
+    if (!v) { try { v = sessionStorage.getItem('firststep.room') || ''; if (v) sessionStorage.removeItem('firststep.room'); } catch (e) {} }
+    return v;
+  }
+  adopt(v) {
+    if (!v) return;
+    if (v === 'none') { this.setState({ step: 1, submitted: false }); return; }
+    if (this.rooms[v]) {
+      const cond = Object.assign({}, this.rooms[v].cond);
+      this.setState(Object.assign({ room: v, cond, step: 2, submitted: false }, this.recsFor(cond)));
+    }
+  }
+  componentDidMount() {
+    this._onStorage = (e) => { if (e && e.key === 'firststep.room' && e.newValue) this.adopt(this.takeHandover() || e.newValue); };
+    try { window.addEventListener('storage', this._onStorage); } catch (e) {}
+    this._poll = setInterval(() => { const v = this.takeHandover(); if (v) this.adopt(v); }, 400);
+  }
+  componentWillUnmount() {
+    try { window.removeEventListener('storage', this._onStorage); } catch (e) {}
+    if (this._poll) clearInterval(this._poll);
+  }
+  recsFor(c) {
+    const count = c.plants === 'plenty' ? 0 : c.size === 'compact' ? 4 : c.size === 'large' ? 14 : 8;
+    const low = c.daylight === 'low';
+    return {
+      cct: 3000, dimming: true, zones: c.size === 'compact' ? 1 : c.size === 'large' ? 3 : 2,
+      plantCount: count,
+      sp: { zz: true, cast: low, pothos: true, pep: true, spider: !low, peace: false },
+      palette: c.glare === 'strong' || c.lighting === 'ledfixed' && c.daylight === 'low' ? 'horizon' : 'calm',
+      finish: 'lowsheen', noChange: c.walls === 'matt'
+    };
+  }
+  rgb(hex) {
+    const n = parseInt(String(hex).replace('#', ''), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  shade(hex, f) {
+    const [r, g, b] = this.rgb(hex);
+    return '#' + [r, g, b].map((v) => Math.round(v * f).toString(16).padStart(2, '0')).join('');
+  }
+  fmt(n) { return Math.round(n).toLocaleString('en-AU'); }
+  setCond(key, val) {
+    const cond = Object.assign({}, this.state.cond, { [key]: val });
+    this.setState(Object.assign({ cond }, this.recsFor(cond)));
+  }
+  renderVals() {
+    const s = this.state;
+    const c = s.cond;
+    const room = this.rooms[s.room];
+    const accent = this.props.accent ?? '#579B96';
+    const [r, g, b] = this.rgb(accent);
+    const accentDeep = accent.toLowerCase() === '#579b96' ? '#2F6663' : this.shade(accent, 0.55);
+    const accentTint = 'rgba(' + r + ',' + g + ',' + b + ',0.16)';
+    const accentSoft = 'rgba(' + r + ',' + g + ',' + b + ',0.45)';
+    const within = { bg: accentTint, fg: accentDeep };
+    const review = { bg: '#FBF0D5', fg: '#8A5A00' };
+    const outside = { bg: '#FBE5E3', fg: '#9B2C2C' };
+    const none = { bg: '#EDEAE3', fg: '#1C2420' };
+
+    const fittingsN = c.size === 'compact' ? 6 : c.size === 'large' ? 24 : 12;
+    const existingPer = c.lighting === 'fluorescent' ? 82 : c.lighting === 'ledfixed' ? 40 : 36;
+    const replace = c.lighting === 'fluorescent';
+    const existingW = fittingsN * existingPer;
+    const proposedW = replace ? fittingsN * 32 : existingW;
+    const hours = 2000, tariff = 0.3;
+    const savingKwh = (existingW - proposedW) / 1000 * hours;
+    const savingCost = savingKwh * tariff;
+    const glareCost = c.glare === 'strong' ? 900 : c.glare === 'some' ? 500 : 0;
+    const lightCost = (replace ? fittingsN * 280 + (s.dimming ? 400 : 0) + (s.zones > 1 ? 200 : 0) : c.lighting === 'ledfixed' && s.dimming ? 1900 : 0) + glareCost;
+    const plantCost = s.plantCount * 120;
+    const paintArea = c.size === 'compact' ? 40 : c.size === 'large' ? 120 : 60;
+    const repaint = c.walls === 'glossy';
+    const doPaint = !s.noChange;
+    const paintCost = doPaint ? paintArea * 18 : 0;
+    const total = lightCost + plantCost + paintCost;
+    const payback = savingCost > 0 ? total / savingCost : null;
+
+    let cctStatus;
+    if (s.cct >= 2700 && s.cct <= 3000) cctStatus = Object.assign({ label: 'Within guideline · calm range' }, within);
+    else if (s.cct > 3000 && s.cct <= 4000) cctStatus = Object.assign({ label: 'Within guideline · task range' }, within);
+    else if (s.cct < 2700) cctStatus = Object.assign({ label: 'Needs review · below 2700 K' }, review);
+    else cctStatus = Object.assign({ label: 'Outside guideline · above 4000 K, try 3500–4000 K' }, outside);
+    const greenWithin = { bg: '#D9E9D3', fg: '#2B5A3A' };
+    const lightStatus = cctStatus.fg === outside.fg ? Object.assign({ label: 'Outside guideline' }, outside) : cctStatus.fg === review.fg ? Object.assign({ label: 'Needs review' }, review) : Object.assign({ label: 'Within guideline' }, greenWithin);
+    const lightWithin = lightStatus.fg === greenWithin.fg;
+    let cctHint, cctHintFg = '#2F6663';
+    if (s.cct < 2700) { cctHint = 'Below the calm range · needs review'; cctHintFg = '#8A5A00'; }
+    else if (s.cct <= 3000) cctHint = 'Suitable for calm, warm use';
+    else if (s.cct < 3400) cctHint = 'Suitable for general use';
+    else if (s.cct <= 4000) cctHint = 'Suitable for task-focused use';
+    else { cctHint = 'Above the task range · outside guideline'; cctHintFg = '#9B2C2C'; }
+
+    const lightHeadline = replace ? 'Replace fluorescent lighting with flicker-free ' + (s.dimming ? 'Smart LEDs' : 'LEDs') : c.lighting === 'ledfixed' ? 'Keep the LED fittings · add dimming and scenes' : 'Keep the fittings · add a warm default scene';
+    const lightWhy = replace ? (c.daylight === 'low' ? 'Low daylight, ageing tubes' : 'Ageing tubes') : c.lighting === 'ledfixed' ? 'Existing LEDs are sound; only controls are justified' : 'Already dimmable';
+    const lightRefs = replace ? 'L1, L2, L5, L9' : 'L2, L5, L6';
+    const glareFirst = c.glare !== 'none';
+
+    const sel = Object.keys(s.sp).filter((k) => s.sp[k]);
+    const plantNotRequired = c.plants === 'plenty';
+    let plantStatus;
+    if (plantNotRequired) plantStatus = Object.assign({ label: 'Not required' }, none);
+    else if (s.sp.peace) plantStatus = Object.assign({ label: 'Needs review · toxicity' }, review);
+    else if (c.daylight === 'low' && s.sp.spider && !s.sp.zz && !s.sp.cast) plantStatus = Object.assign({ label: 'Needs review · light' }, review);
+    else if (s.plantCount === 0) plantStatus = Object.assign({ label: 'None proposed' }, none);
+    else plantStatus = Object.assign({ label: 'Within guideline' }, greenWithin);
+    const plantHeadline1 = plantNotRequired ? 'Planting already in place' : s.plantCount + ' ' + (c.daylight === 'low' ? 'low-light' : 'easy-care') + ' plants in';
+    const plantHeadline2 = plantNotRequired ? 'keep and maintain' : 'self-watering pots';
+    const plantHeadline = plantNotRequired ? 'Planting already in place · keep and maintain' : s.plantCount + ' ' + (c.daylight === 'low' ? 'low-light' : 'easy-care') + ' plants in self-watering pots';
+    const plantWhy = plantNotRequired ? 'Coverage above 1% of floor area' : c.size === 'compact' ? 'Small room: keep paths clear' : c.daylight === 'low' ? 'Low daylight limits species' : 'Window wall and rear bench';
+    const coverage = s.plantCount * 0.07 / room.area * 100;
+    const speciesNote = s.sp.peace ? 'Peace lily is toxic if ingested — a reviewer must approve it.' : sel.length ? 'Low shedding • Low odour' : 'Pick at least one species.';
+
+    const notRequired = { bg: '#FCEBD5', fg: '#9A5A10', icon: '#E8A04A' };
+    let colourStatus;
+    if (!doPaint) colourStatus = repaint ? Object.assign({ label: 'Needs review · glossy walls kept' }, review) : Object.assign({ label: 'Not required' }, notRequired);
+    else if (s.finish === 'semigloss') colourStatus = Object.assign({ label: 'Outside guideline · reflective' }, outside);
+    else if (s.finish === 'eggshell') colourStatus = Object.assign({ label: 'Needs review' }, review);
+    else colourStatus = Object.assign({ label: 'Within guideline' }, greenWithin);
+    const colourNone = colourStatus.fg === notRequired.fg;
+    const colourWithin = colourStatus.fg === greenWithin.fg;
+    const palNames = { calm: 'Calm Study', warm: 'Warm Neutral', horizon: 'Soft Horizon' };
+    const finishNames = { lowsheen: 'low sheen', matt: 'matt', eggshell: 'eggshell', semigloss: 'semi-gloss' };
+    const colourHeadline = doPaint ? 'Repaint ' + paintArea + ' m² in ' + palNames[s.palette] + ', ' + finishNames[s.finish] : repaint ? 'Existing glossy walls kept. Repaint recommended' : 'Existing matt walls are fine. No repaint proposed';
+    const colourWhy = repaint ? 'Glossy walls reflect fittings and projector' : 'Finish already low-glare';
+    const finishNote = s.finish === 'semigloss' ? 'Semi-gloss reflects glare — choose low sheen or matt' : s.finish === 'eggshell' ? 'Eggshell needs a check on the projector wall' : 'Low-sheen finishes reduce glare & visual noise';
+
+    const all = [lightStatus, plantStatus, colourStatus];
+    const exceptionCount = all.filter((x) => x.fg === review.fg || x.fg === outside.fg).length;
+    const planStatus = all.some((x) => x.fg === outside.fg) ? Object.assign({ label: 'Outside guideline' }, outside) : exceptionCount ? Object.assign({ label: exceptionCount + ' for review' }, review) : Object.assign({ label: 'Within guideline' }, within);
+
+    const cols = fittingsN > 12 ? 6 : 4;
+    const rows = Math.max(1, Math.ceil(fittingsN / cols));
+    const fittings = [];
+    for (let i = 0; i < fittingsN; i++) {
+      const col = i % cols, rw = Math.floor(i / cols);
+      fittings.push({ x: 48 + col * (344 / (cols - 1)), y: 36 + rw * (300 / rows), bg: rw === 0 || s.zones === 1 ? accent : accentSoft, ring: rw === 0 || s.zones === 1 ? accentDeep : accent });
+    }
+    const spots = [[14, 92], [14, 146], [14, 200], [14, 254], [60, 322], [120, 322], [180, 322], [240, 322], [300, 322], [402, 92], [402, 146], [402, 200], [402, 254], [40, 40]];
+    const plantDots = spots.slice(0, Math.min(s.plantCount, spots.length)).map(([x, y]) => ({ x, y }));
+
+    const stepStyle = (n) => n < s.step ? { bg: accentTint, fg: accentDeep, bd: accentTint, dot: accentDeep, dotFg: '#FFFFFF', mark: '✓' } : n === s.step ? { bg: '#213F36', fg: '#FFFFFF', bd: '#213F36', dot: '#FFFFFF', dotFg: '#213F36', mark: String(n) } : { bg: '#FFFFFF', fg: '#5B645F', bd: '#E7E4DC', dot: '#F4F2EC', dotFg: '#5B645F', mark: String(n) };
+    const titles = ['Which classroom?', 'What is the room like?', 'Here is the recommended plan', 'Plan and impact'];
+    const hints = ['Pick a classroom record, or start from a type in the library.', 'Six quick choices. Everything else can be refined later.', 'Three interventions, tuned to the room. Adjust within the guardrails.', room.name + ' · A$' + this.fmt(total) + ' illustrative estimate'];
+
+    const opt = (key, val) => ({ on: c[key] === val ? 'true' : 'false', bg: c[key] === val ? accentTint : '#FFFFFF', bd: c[key] === val ? accentDeep : '#E7E4DC', pick: () => this.setCond(key, val) });
+    const o = {};
+    [['daylight', ['low', 'medium', 'strong']], ['lighting', ['fluorescent', 'ledfixed', 'leddim']], ['glare', ['none', 'some', 'strong']], ['plants', ['none', 'some', 'plenty']], ['walls', ['glossy', 'matt']], ['size', ['compact', 'standard', 'large']]].forEach(([k, vals]) => vals.forEach((v) => { o[k + '_' + v] = opt(k, v); }));
+    const rm = {};
+    Object.keys(this.rooms).forEach((id) => { const on = s.room === id; rm[id] = { on: on ? 'true' : 'false', bg: on ? accentTint : '#FFFFFF', bd: on ? accentDeep : '#E7E4DC', dot: on ? accentDeep : '#E7E4DC', pick: () => { const cond = Object.assign({}, this.rooms[id].cond); this.setState(Object.assign({ room: id, cond, submitted: false }, this.recsFor(cond))); } }; });
+    const chip = (on, pick) => ({ on: on ? 'true' : 'false', bg: on ? accentTint : '#FFFFFF', bd: on ? accentDeep : '#D9D5CB', pick });
+    const sp = {};
+    Object.keys(s.sp).forEach((k) => { const on = !!s.sp[k]; sp[k] = Object.assign(chip(on, () => this.setState({ sp: Object.assign({}, s.sp, { [k]: !on }) })), { checked: on, on: on ? 'true' : 'false', tileBd: on ? '#213F36' : '#E7E4DC', tickBd: on ? '#213F36' : '#D9D5CB', tickBg: on ? '#213F36' : '#FFFFFF', tickFg: on ? '#FFFFFF' : 'rgba(0,0,0,0)' }); });
+    const pl = {};
+    ['calm', 'warm', 'horizon'].forEach((k) => { const on = s.palette === k && !s.noChange; pl[k] = Object.assign(chip(on, () => this.setState({ palette: k, noChange: false })), { tileBd: on ? '#213F36' : '#E7E4DC', fw: on ? '700' : '400' }); });
+    const fn = {};
+    ['lowsheen', 'matt', 'eggshell', 'semigloss'].forEach((k) => { fn[k] = Object.assign(chip(s.finish === k, () => this.setState({ finish: k })), { chipBd: s.finish === k ? '#2F4F45' : '#E7E4DC', chipBg: s.finish === k ? '#E3EAE6' : '#FFFFFF' }); });
+    const z = (n) => Object.assign(chip(s.zones === n, () => this.setState({ zones: n })), { segBg: s.zones === n ? '#213F36' : '#FFFFFF', segFg: s.zones === n ? '#FFFFFF' : '#1C2420' });
+
+    return {
+      accent, accentDeep, accentTint, accentSoft,
+      isStep1: s.step === 1, isStep2: s.step === 2, isStep3: s.step === 3, isStep4: s.step === 4,
+      st1: stepStyle(1), st2: stepStyle(2), st3: stepStyle(3), st4: stepStyle(4),
+      stepTitle: titles[s.step - 1], stepHint: hints[s.step - 1],
+      next: () => this.setState({ step: Math.min(4, s.step + 1) }), back: () => this.setState({ step: Math.max(1, s.step - 1) }),
+      restart: () => this.setState({ step: 1, submitted: false }),
+      r: rm, o, sp, pl, fn, z1: z(1), z2: z(2), z3: z(3),
+      cct: s.cct, setCct: (e) => this.setState({ cct: Number(e.target.value) }), cctStatus,
+      dimming: s.dimming, dimmingOn: s.dimming ? 'true' : 'false', toggleDimming: () => this.setState({ dimming: !s.dimming }), dimBg: s.dimming ? '#213F36' : '#C9C4B6', dimKnob: s.dimming ? '23px' : '3px',
+      plantCount: s.plantCount, fewer: () => this.setState({ plantCount: Math.max(0, s.plantCount - 1) }), more: () => this.setState({ plantCount: Math.min(14, s.plantCount + 1) }),
+      coverageText: coverage.toFixed(1) + '% of ' + room.area + ' m²', coverageBar: Math.min(100, coverage / 2 * 100),
+      lightStatus, lightWithin, lightNotWithin: !lightWithin, cctHint, cctHintFg, lightHeadline, lightWhy, lightRefs, glareFirst,
+      plantStatus, plantWithin: plantStatus.fg === greenWithin.fg, plantNotWithin: plantStatus.fg !== greenWithin.fg, plantHeadline, plantHeadline1, plantHeadline2, plantWhy, speciesNote, coveragePct: coverage.toFixed(1) + '%', roomArea: room.area,
+      colourStatus, colourNone, colourWithin, colourFlag: !colourNone && !colourWithin, colourHeadline, colourWhy, finishNote, noChange: !!s.noChange, noChangeOn: s.noChange ? 'true' : 'false', toggleNoChange: () => this.setState({ noChange: !s.noChange }), nc: { tickBd: s.noChange ? '#213F36' : '#D9D5CB', tickBg: s.noChange ? '#213F36' : '#FFFFFF', tickFg: s.noChange ? '#FFFFFF' : 'rgba(0,0,0,0)' }, noChangeBd: s.noChange ? '#213F36' : '#E7E4DC', noChangeBg: s.noChange ? '#E3EAE6' : '#FFFFFF', finishOpacity: s.noChange ? '0.45' : '1',
+      resetRecs: () => this.setState(this.recsFor(c)),
+      roomName: room.name, fittings, plantDots, plantsDrawn: plantDots.length,
+      fittingLegend: replace ? 'New LED · zone A' : 'Existing fitting · zone A',
+      totalText: this.fmt(total), savingKwhText: this.fmt(savingKwh), savingCostText: this.fmt(savingCost),
+      paybackText: payback === null ? 'Not reached' : payback > 25 ? 'Over 25 years' : payback.toFixed(1) + ' years',
+      paybackNote: payback === null ? 'No energy saving modelled' : 'Energy savings only',
+      planStatus, exceptionCount,
+      lightLine: replace ? fittingsN + ' LED fittings, install, controls' : c.lighting === 'ledfixed' ? 'Controls retrofit' + (glareCost ? ', glare treatment' : '') : glareCost ? 'Glare treatment only' : 'No lighting work',
+      plantLine: s.plantCount ? s.plantCount + ' plants, pots and media' : 'No planting',
+      colourLine: doPaint ? paintArea + ' m² repaint, ' + finishNames[s.finish] : 'No repaint required',
+      lightCostText: this.fmt(lightCost), plantCostText: this.fmt(plantCost), paintCostText: this.fmt(paintCost),
+      verifyLine: 'To verify: ballast wattage (electrician), water access (facilities)' + (glareFirst ? ', glare measurement (lighting designer)' : ''),
+      submitted: s.submitted, savedText: s.savedText,
+      save: () => this.setState({ savedText: 'Draft saved just now' }),
+      submit: () => this.setState({ submitted: true, savedText: 'Submitted for review' })
+    };
+  }
+}
+</script>
+</body>
+</html>
