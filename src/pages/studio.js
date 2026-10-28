@@ -135,11 +135,13 @@ function renderIntro(S, P) {
 }
 
 function renderStepper(S) {
-  return html`<ol class="st-stepper" aria-label="Steps">${STEP_LABELS.map((label, i) => {
-    const n = i + 1;
+  const labels = S.showStep1 ? STEP_LABELS : STEP_LABELS.slice(1);
+  const first = S.showStep1 ? 1 : 2;
+  return html`<ol class="st-stepper ${S.showStep1 ? '' : 'st-stepper--3'}" aria-label="Steps">${labels.map((label, i) => {
+    const n = i + first;
     if (n < S.step) return html`<li><button type="button" class="step st-step is-done" data-action="goto" data-arg="${n}" data-key="step-${n}" aria-label="Back to step ${n}: ${label}"><span class="step__dot" aria-hidden="true">✓</span><span>${label}</span></button></li>`;
-    if (n === S.step) return html`<li><span class="step st-step is-current" aria-current="step"><span class="step__dot" aria-hidden="true">${n}</span><span>${label}</span></span></li>`;
-    return html`<li><span class="step st-step"><span class="step__dot" aria-hidden="true">${n}</span><span>${label}</span></span></li>`;
+    if (n === S.step) return html`<li><span class="step st-step is-current" aria-current="step"><span class="step__dot" aria-hidden="true">${n - first + 1}</span><span>${label}</span></span></li>`;
+    return html`<li><span class="step st-step"><span class="step__dot" aria-hidden="true">${n - first + 1}</span><span>${label}</span></span></li>`;
   })}</ol>`;
 }
 
@@ -150,11 +152,11 @@ function renderBanner(S, P) {
       <span class="st-banner__text"><strong>Submitted for review</strong> · ${P.exceptionCount} item(s) for a reviewer · <a href="#/reports">Track it in Reports</a> · <a href="#/energy">See the energy case</a></span>
     </div>`;
   }
-  if (S.step === 1 && S.type) {
+  if (S.step <= 2 && S.type) {
     return html`<div class="st-banner st-banner--type fade-swap" role="status">
       <span class="st-banner__dot">${icon('grid', { size: 16, stroke: 1.8 })}</span>
       <span class="st-banner__text"><strong>Starting point: ${S.type.name}</strong> · ${S.type.sub}</span>
-      <button type="button" class="btn btn--sm" data-action="add-room">${icon('plus', { size: 14, stroke: 2 })}<span>Add a classroom from this type</span></button>
+      ${S.showStep1 ? html`<button type="button" class="btn btn--sm" data-action="add-room">${icon('plus', { size: 14, stroke: 2 })}<span>Add a classroom from this type</span></button>` : ''}
     </div>`;
   }
   return html``;
@@ -193,7 +195,7 @@ function renderStep2(S) {
       ${row.options.length < 3 ? html`<span></span>` : ''}
     </div>`)}
     <div class="st-foot st-foot--pad">
-      <button type="button" class="btn" data-action="back" data-key="back">${icon('chevron-left', { size: 16, stroke: 1.8 })}Back</button>
+      <button type="button" class="btn" data-action="back" data-key="back">${icon('chevron-left', { size: 16, stroke: 1.8 })}${S.showStep1 ? 'Back' : 'Back to library'}</button>
       <span class="st-hint">Pre-filled from the classroom record · tap to change · a photograph can be added later</span>
       <button type="button" class="btn btn--primary" data-action="next" data-key="next">Generate recommendations${icon('arrow-right', { size: 18, stroke: 2 })}</button>
     </div>
@@ -423,7 +425,7 @@ function openAddRoom(type, rooms, onAdded) {
 export default async function page(ctx) {
   await loadStyle(new URL('./studio.css', import.meta.url));
 
-  const S = { step: 1, rooms: [], roomId: null, room: null, cond: null, plan: null, submitted: false, savedText: 'Draft · not yet saved', type: null, loadingRoomId: null };
+  const S = { step: 1, rooms: [], roomId: null, room: null, cond: null, plan: null, submitted: false, savedText: 'Draft · not yet saved', type: null, loadingRoomId: null, showStep1: false };
   let settings = { hours: DEFAULT_HOURS, tariff: DEFAULT_TARIFF };
   let dialog = null;
   let condTimer = null;
@@ -449,19 +451,32 @@ export default async function page(ctx) {
   S.rooms = rooms;
   S.photos = await photoUrlsFor(rooms);
   if (loadedSettings) settings = { hours: Number(loadedSettings.hours) || DEFAULT_HOURS, tariff: Number(loadedSettings.tariff) || DEFAULT_TARIFF };
+  S.showStep1 = !!(loadedSettings && loadedSettings.showStudioClassroomStep);
+  const firstStep = S.showStep1 ? 1 : 2;
   const wantRoom = q.get('room');
   const wantType = q.get('type');
   const stepParam = parseInt(q.get('step') || '', 10);
   const wantStep = stepParam >= 1 && stepParam <= 4 ? stepParam : 0;
   if (wantRoom && rooms.some((r) => r.id === wantRoom)) { await loadRoom(wantRoom); S.step = 2; }
-  else {
-    if (wantType) S.type = typeById(wantType) || null;
+  else if (wantType && typeById(wantType)) {
+    // A classroom type goes straight to the conditions step, on that type's working classroom.
+    S.type = typeById(wantType);
+    const room = await api.getOrCreateTypeRoom(wantType);
+    if (room) { if (!rooms.some((r) => r.id === room.id)) { rooms.push(room); S.rooms = rooms; } await loadRoom(room.id); S.step = 2; }
+  } else {
     const active = (store.get().ui || {}).activeRoomId;
-    const preset = rooms.find((r) => r.id === active) || rooms[0];
-    if (preset) await loadRoom(preset.id);
+    const preset = rooms.find((r) => r.id === active && (S.showStep1 || r.fromType)) || (S.showStep1 ? rooms[0] : null);
+    if (preset) { await loadRoom(preset.id); if (preset.fromType) S.type = typeById(preset.fromType) || null; }
+    S.step = firstStep;
   }
-  if (wantStep) S.step = S.room ? wantStep : 1;
+  if (wantStep) S.step = S.room ? Math.max(firstStep, wantStep) : firstStep;
   if (wantRoom && !S.room) toast('That classroom could not be found — pick one below.', { kind: 'info' });
+  if (!S.room && !S.showStep1) {
+    // Without the Classroom step there is nothing to plan until a type is chosen.
+    toast('Pick a classroom type to start a plan.', { kind: 'info' });
+    ctx.replace('/');
+    return html`<div class="page"></div>`;
+  }
 
   const calc = () => computePlan({ ...S.room, cond: S.cond }, S.plan, settings);
 
@@ -494,7 +509,9 @@ export default async function page(ctx) {
   const renderStep = () => render();
 
   function go(n) {
-    const next = Math.min(4, Math.max(1, n));
+    const first = S.showStep1 ? 1 : 2;
+    if (n < first) { flushCond(); ctx.navigate('/'); return; }
+    const next = Math.min(4, Math.max(first, n));
     if (next === S.step) return;
     if (next > 1 && !S.room) { toast('Pick a classroom first.', { kind: 'info' }); return; }
     const forward = next > S.step;
@@ -573,7 +590,7 @@ export default async function page(ctx) {
   }
   function restart() {
     flushCond();
-    S.step = 1; S.submitted = false; S.type = null;
+    S.step = S.showStep1 ? 1 : 2; S.submitted = false; if (S.showStep1) S.type = null;
     if (S.room) { S.cond = { ...S.room.cond }; S.plan = planFrom(store.get().plans[S.roomId], S.cond); S.savedText = savedTextFor(store.get().plans[S.roomId], S.room); }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     render({ anim: 'fade-swap', focusTitle: true });

@@ -79,3 +79,9 @@
 @media (max-width: 720px) {
   .se-card { padding: 18px; }
 }
+
+/* Classroom options */
+.se-toggles { display: flex; flex-direction: column; gap: 10px; }
+.se-toggle { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; cursor: pointer; }
+.se-toggle:hover { border-color: var(--opt-hover); }
+.se-toggle__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }

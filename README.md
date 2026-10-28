@@ -76,3 +76,7 @@ Each classroom card can show a photo. Two ways to add one:
 
 - In the app: hover a card in "Your classrooms" and click the small + button (or pick a photo when adding a classroom). The image is resized and stored in the browser on that device.
 - In the code: put a file under `assets/img/classrooms/` and set `photo: './assets/img/classrooms/<file>'` on the room in `src/data/rooms.js` (or on a room created in `src/lib/api.js`). Static photos show everywhere, for everyone.
+
+## Classroom records (optional)
+
+By default a classroom type card opens the Design Studio directly at the Conditions step, on a working classroom created for that type. Two options in Settings → Classrooms turn the classroom-record features back on: the "Your classrooms" list in the Library (with photos and Add classroom) and the "Classroom" step in the Design Studio. Both are stored in `settings.showLibraryClassrooms` / `settings.showStudioClassroomStep`.

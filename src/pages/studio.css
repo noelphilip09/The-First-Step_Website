@@ -205,3 +205,7 @@ button.st-step:hover { border-color: var(--accent-deep); }
   .st-stats { grid-template-columns: 1fr; }
   .st-form__grid { grid-template-columns: 1fr; }
 }
+
+/* Three-step stepper (Classroom step switched off in Settings) */
+.st-stepper--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 720px) { .st-stepper--3 { grid-template-columns: 1fr; } }

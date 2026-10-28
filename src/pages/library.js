@@ -171,8 +171,9 @@ function openNewRoom(ctx, { rooms, typeId, onClose }) {
 /* ---------- Page ---------- */
 export default async function page(ctx) {
   await loadStyle(new URL('./library.css', import.meta.url));
-  const rooms = await api.getRooms();
-  const photos = await photoUrlsFor(rooms);
+  const [rooms, settings] = await Promise.all([api.getRooms(), api.getSettings().catch(() => ({}))]);
+  const showRooms = !!(settings && settings.showLibraryClassrooms);
+  const photos = showRooms ? await photoUrlsFor(rooms) : {};
 
   let filter = 'all';
   let queryRaw = String(ctx.query.get('q') || '').trim();
@@ -200,13 +201,13 @@ export default async function page(ctx) {
 
     <section class="grid grid--tiles lib-tiles" aria-label="Classroom types" data-types></section>
 
-    <section class="section lib-rooms" aria-label="Your classrooms">
+    ${showRooms ? html`<section class="section lib-rooms" aria-label="Your classrooms">
       <div class="section-head" data-reveal style="--i:0">
         <h2 class="h-section">Your classrooms</h2>
         <button type="button" class="btn lib-add" data-add>${icon('plus', { size: 16, stroke: 1.8 })}Add classroom</button>
       </div>
       <div class="grid grid--tiles lib-rooms__grid" data-rooms></div>
-    </section>
+    </section>` : ''}
   </div>`;
 
   const typesHost = $('[data-types]', el);
@@ -219,7 +220,7 @@ export default async function page(ctx) {
   function renderTypes(swap = false) {
     const list = visibleTypes();
     const nodes = list.map((t, i) => typeTile(ctx, t, i, swap));
-    if (list.length) nodes.push(addTile(list.length, swap));
+    if (list.length && showRooms) nodes.push(addTile(list.length, swap));
     else nodes.push(spanCell(swap, emptyState(
       'No classroom types match',
       query ? `Nothing matches “${queryRaw}” here. Try another word or show all types.` : 'Try a different filter.',
@@ -230,6 +231,7 @@ export default async function page(ctx) {
   }
 
   function renderRooms(swap = false) {
+    if (!roomsHost) return;
     const list = visibleRooms();
     const nodes = list.length
       ? list.map((r, i) => roomTile(ctx, r, i + 1, swap, photos[r.id]))

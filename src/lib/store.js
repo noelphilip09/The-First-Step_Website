@@ -22,7 +22,7 @@ export function initialState() {
       { id: 'n2', text: 'Group Study 07 was approved by Facilities', at: now - DAY * 3, read: true, href: '#/reports' },
       { id: 'n3', text: 'Lighting Guidelines updated to v2.3', at: now - DAY * 6, read: true, href: '#/settings' }
     ],
-    settings: { accent: 'teal', hours: 2000, tariff: 0.30, currency: 'AUD', guidelineVersion: '2.3' },
+    settings: { accent: 'teal', hours: 2000, tariff: 0.30, currency: 'AUD', guidelineVersion: '2.3', showLibraryClassrooms: false, showStudioClassroomStep: false },
     ui: { navCollapsed: false, activeRoomId: 'sr01' }
   };
 }

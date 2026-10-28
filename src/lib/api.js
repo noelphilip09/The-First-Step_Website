@@ -28,6 +28,22 @@ export const api = {
     store.set((s) => ({ ...s, rooms: [...s.rooms, room], ui: { ...s.ui, activeRoomId: room.id } }));
     return room;
   },
+  // One working classroom per classroom type, created on first use, so a plan can start straight
+  // from a type card. Name and typical area come from the type; conditions are the type's.
+  async getOrCreateTypeRoom(typeId) {
+    await latency(250, 200);
+    const s = store.get();
+    const type = s.types.find((t) => t.id === typeId);
+    if (!type) return null;
+    const existing = s.rooms.find((r) => r.fromType === type.id);
+    if (existing) { store.set((st) => ({ ...st, ui: { ...st.ui, activeRoomId: existing.id } })); return existing; }
+    const nums = (String(type.size || '').match(/\d+/g) || []).map(Number);
+    const area = /under/i.test(type.size || '') ? Math.round((nums[0] || 40) * 0.85) : nums.length >= 2 ? Math.round((nums[0] + nums[1]) / 2) : nums[0] || 60;
+    const lighting = type.cond.lighting === 'fluorescent' ? 'Fluorescent' : type.cond.lighting === 'ledfixed' ? 'LED, fixed' : 'LED, dimmable';
+    const room = { id: 'type-' + type.id, name: type.name, building: 'Classroom type', level: type.num, area, status: 'not-assessed', type: type.id, fromType: type.id, lightingLabel: lighting, cond: { ...type.cond }, updatedAt: Date.now() };
+    store.set((st) => ({ ...st, rooms: [...st.rooms, room], ui: { ...st.ui, activeRoomId: room.id } }));
+    return room;
+  },
   async updateRoomConditions(roomId, cond) {
     await latency(150, 100);
     store.set((s) => ({ ...s, rooms: s.rooms.map((r) => r.id === roomId ? { ...r, cond: { ...r.cond, ...cond }, updatedAt: Date.now() } : r) }));

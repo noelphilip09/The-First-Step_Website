@@ -153,6 +153,15 @@ export default async function page(ctx) {
       </div>
     </section>
 
+    <section class="se-card se-options" aria-label="Classrooms" data-reveal>
+      <div class="se-card__head"><h3 class="se-card__title">Classrooms</h3></div>
+      <p class="small muted">Off by default: a classroom type opens the Design Studio at its conditions straight away. Switch these on to keep a list of individual classroom records as well.</p>
+      <div class="se-toggles">
+        <label class="se-toggle"><span class="se-toggle__text"><strong>“Your classrooms” in the Library</strong><span class="tiny muted">The list of classroom records under the type cards, with photos, status and the Add classroom button.</span></span><input type="checkbox" class="switch" data-opt="showLibraryClassrooms" data-key="opt-library" ${settings.showLibraryClassrooms ? raw('checked') : ''}></label>
+        <label class="se-toggle"><span class="se-toggle__text"><strong>“Classroom” step in the Design Studio</strong><span class="tiny muted">A first step to pick a classroom record before the conditions. When off, the Studio starts at Conditions.</span></span><input type="checkbox" class="switch" data-opt="showStudioClassroomStep" data-key="opt-studio" ${settings.showStudioClassroomStep ? raw('checked') : ''}></label>
+      </div>
+    </section>
+
     <div class="se-two">
       <section class="se-card" aria-label="Permissions" data-reveal>
         <div class="se-card__head"><h3 class="se-card__title">Permissions</h3><div class="se-card__actions"><span class="inline-loading" data-saving hidden><span class="spinner" aria-hidden="true"></span>Saving…</span><button type="button" class="btn se-btn-sm" data-action="invite">${svg(14, P.plus, 2, false)}Invite</button></div></div>
@@ -189,6 +198,15 @@ export default async function page(ctx) {
   on(el, 'click', '[data-scroll]', (e, a) => { e.preventDefault(); scrollTo(a.dataset.scroll); });
   const wanted = ctx.query.get('section');
   if (wanted) setTimeout(() => { if (ctx.isCurrent()) scrollTo(wanted); }, 420);
+
+  // Classroom options: each switch saves at once.
+  on(el, 'change', 'input.switch[data-opt]', async (e, input) => {
+    const key = input.dataset.opt; const value = input.checked;
+    input.disabled = true;
+    try { await api.updateSettings({ [key]: value }); refreshSettings(); toast(value ? 'Switched on' : 'Switched off', { timeout: 2000 }); }
+    catch (err) { console.error(err); input.checked = !value; toast('Could not save that option', { kind: 'error' }); }
+    finally { input.disabled = false; }
+  });
 
   // Permissions: switches persist (debounced) to settings.permissions.
   let saveTimer = null;
