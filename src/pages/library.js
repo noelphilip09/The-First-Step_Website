@@ -5,7 +5,7 @@ import { html, raw, esc, $, $$, on, patch } from '../lib/dom.js';
 import { icon } from '../components/icons.js';
 import { button, dotIcon, roomStatusPill, emptyState, roomThumb } from '../components/ui.js';
 import { api } from '../lib/api.js';
-import { loadStyle, openDialog, withSpinner, toast } from '../lib/loading.js';
+import { loadStyle, openDialog, withSpinner, toast, lazyImage } from '../lib/loading.js';
 import { TYPES } from '../data/types.js';
 import { roomMeta } from '../data/rooms.js';
 import { COND_LABEL } from '../lib/plan.js';
@@ -80,7 +80,7 @@ function typeTile(ctx, t, i, swap) {
   const f = t.focus || {};
   return html`<div ${cell(i, swap)}>
     <a class="tile" href="${ctx.href('/studio', { type: t.id })}" data-key="type-${t.id}">
-      <div class="tile__media">${illo(t)}<span class="tile__num">${t.num}</span></div>
+      <div class="tile__media ${t.image ? 'tile__media--photo' : ''}">${t.image ? lazyImage({ src: t.image, alt: t.illo, ratio: '16 / 10' }) : illo(t)}<span class="tile__num">${t.num}</span></div>
       <div class="tile__body">
         <div class="row between gap-10"><span class="tile__title">${t.name}</span>${icon('arrow-right', { size: 20, stroke: 2 })}</div>
         <span class="tile__sub">${t.sub}</span>
