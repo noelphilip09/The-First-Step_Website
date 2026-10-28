@@ -64,6 +64,8 @@
 .dot-icon--lg { width: 40px; height: 40px; }
 .dot-icon--xl { width: 48px; height: 48px; }
 .thumb { width: 72px; height: 72px; border-radius: 12px; background: var(--surface-3); display: flex; align-items: center; justify-content: center; color: var(--muted); flex: 0 0 72px; overflow: hidden; }
+.thumb--photo { background: var(--surface-2); border: 1px solid var(--border); }
+.thumb .lazy-img { width: 100%; height: 100%; }
 .avatar { width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--border); background: var(--accent-tint); color: var(--accent-deep); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; text-decoration: none; }
 .avatar--sm { width: 30px; height: 30px; font-size: 11px; }
 

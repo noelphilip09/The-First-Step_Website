@@ -4,6 +4,7 @@ import { html, raw } from '../lib/dom.js';
 import { icon } from './icons.js';
 import { ROOM_STATUS } from '../lib/constants.js';
 import { pillClass } from '../lib/plan.js';
+import { lazyImage } from '../lib/loading.js';
 
 export const statusPill = (status, extra = '') => html`<span class="${pillClass(status.kind)} ${extra}">${status.label}</span>`;
 export const roomStatusPill = (room, extra = '') => { const s = ROOM_STATUS[room.status] || ROOM_STATUS['not-assessed']; return html`<span class="${s.pill} ${extra}">${s.label}</span>`; };
@@ -36,3 +37,17 @@ export function emptyState(title, text, action) {
 
 // Inline "status row" used on recommendation cards: label + pill
 export const statusRow = (label, status) => html`<div class="row between gap-10"><span class="eyebrow">${label}</span>${statusPill(status)}</div>`;
+
+// Classroom thumbnail: the photo when one is available, else the design's placeholder icon.
+export function roomThumb(room, src, { size = 72, className = '' } = {}) {
+  const dim = size !== 72 ? `width:${size}px;height:${size}px;flex-basis:${size}px;` : '';
+  const el = html`<span class="thumb ${src ? 'thumb--photo' : ''} ${className}" style="${dim}"></span>`;
+  if (src) {
+    const img = lazyImage({ src, alt: `${room.name} photo`, className: 'thumb__img' });
+    img.querySelector('img').addEventListener('error', () => { el.classList.remove('thumb--photo'); el.replaceChildren(html`<span>${icon('image', { size: 22, stroke: 1.5 })}</span>`); }, { once: true });
+    el.append(img);
+  } else {
+    el.append(html`<span>${icon('image', { size: 22, stroke: 1.5 })}</span>`);
+  }
+  return el;
+}

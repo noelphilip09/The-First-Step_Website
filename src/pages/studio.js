@@ -10,6 +10,7 @@ import { store } from '../lib/store.js';
 import { loadStyle, lazyImage, observeReveal, countUp, withSpinner, toast, openDialog } from '../lib/loading.js';
 import { recsFor, computePlan, COND_FIELDS, SPECIES, DEFAULT_HOURS, DEFAULT_TARIFF } from '../lib/plan.js';
 import { typeById } from '../data/types.js';
+import { photoUrlsFor } from '../lib/photos.js';
 
 /* ---------- Copy from the design ---------- */
 const TITLES = ['Which classroom?', 'What is the room like?', 'Here is the recommended plan', 'Plan and impact'];
@@ -166,7 +167,7 @@ function renderStep1(S) {
       const on = r.id === S.roomId;
       const busy = S.loadingRoomId === r.id;
       return html`<button type="button" class="opt st-room" aria-pressed="${on}" aria-busy="${busy}" data-action="pick-room" data-arg="${r.id}" data-key="room-${r.id}" data-reveal style="--i:${i}">
-        <span class="st-room__icon">${svg(roomIcon(r), 26)}</span>
+        ${S.photos && S.photos[r.id] ? html`<span class="st-room__icon st-room__icon--photo">${lazyImage({ src: S.photos[r.id], alt: '', hidden: true })}</span>` : html`<span class="st-room__icon">${svg(roomIcon(r), 26)}</span>`}
         <span class="st-room__text"><span class="st-room__name">${r.name}</span><span class="st-room__sub">${roomSub(r)}</span></span>
         ${busy
           ? html`<span class="st-room__dot st-room__dot--busy"><span class="spinner" aria-hidden="true"></span><span class="sr-only">Loading…</span></span>`
@@ -446,6 +447,7 @@ export default async function page(ctx) {
   const q = ctx.query;
   const [rooms, loadedSettings] = await Promise.all([api.getRooms(), api.getSettings().catch(() => null)]);
   S.rooms = rooms;
+  S.photos = await photoUrlsFor(rooms);
   if (loadedSettings) settings = { hours: Number(loadedSettings.hours) || DEFAULT_HOURS, tariff: Number(loadedSettings.tariff) || DEFAULT_TARIFF };
   const wantRoom = q.get('room');
   const wantType = q.get('type');

@@ -34,6 +34,7 @@ src/lib/api.js           async data layer with simulated latency (rooms, plans, 
 src/lib/plan.js          plan logic ported from the design (recsFor, computePlan, labels)
 src/lib/loading.js       skeleton(), lazyImage(), observeReveal(), whenVisible(), countUp(), withSpinner(), toast(), loadStyle(), openDialog()
 src/lib/constants.js     room/review status labels + pill classes, current user
+src/lib/photos.js        classroom photos: user uploads kept in IndexedDB (resized), plus static room.photo paths
 src/data/rooms.js        seed classrooms;  src/data/types.js  the ten classroom types
 src/pages/<name>.js      one module per screen (+ optional <name>.css loaded lazily with loadStyle)
 src/styles/tokens.css    every colour / radius / size as a CSS variable (do not hard-code hex in pages)
@@ -68,3 +69,10 @@ Conventions
 - Numbers that change animate with `countUp()`; big sections (charts, tables) can defer work with `whenVisible()`.
 - State changes go through `api.*` (async) → `store`; pages re-render their own regions with `patch()`.
 - Respect `prefers-reduced-motion` (handled centrally in animations.css / loading.js).
+
+## Classroom photos
+
+Each classroom card can show a photo. Two ways to add one:
+
+- In the app: hover a card in "Your classrooms" and click the small + button (or pick a photo when adding a classroom). The image is resized and stored in the browser on that device.
+- In the code: put a file under `assets/img/classrooms/` and set `photo: './assets/img/classrooms/<file>'` on the room in `src/data/rooms.js` (or on a room created in `src/lib/api.js`). Static photos show everywhere, for everyone.

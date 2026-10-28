@@ -3,12 +3,13 @@
 // classrooms. Both grids re-render in place with patch(); everything else is static.
 import { html, raw, esc, $, $$, on, patch } from '../lib/dom.js';
 import { icon } from '../components/icons.js';
-import { button, dotIcon, roomStatusPill, emptyState } from '../components/ui.js';
+import { button, dotIcon, roomStatusPill, emptyState, roomThumb } from '../components/ui.js';
 import { api } from '../lib/api.js';
 import { loadStyle, openDialog, withSpinner, toast } from '../lib/loading.js';
 import { TYPES } from '../data/types.js';
 import { roomMeta } from '../data/rooms.js';
 import { COND_LABEL } from '../lib/plan.js';
+import { photoUrlsFor, setPhoto, pickImage } from '../lib/photos.js';
 
 /* ---------- Filter chips (copy from the design) ---------- */
 const FILTERS = [
@@ -95,16 +96,17 @@ function typeTile(ctx, t, i, swap) {
 
 const addTile = (i, swap) => html`<div ${cell(i, swap)}><button type="button" class="dash-tile" data-add><span class="dash-tile__plus">${icon('plus', { size: 20, stroke: 1.8 })}</span>Add a classroom type</button></div>`;
 
-function roomTile(ctx, r, i, swap) {
-  return html`<div ${cell(i, swap)}>
+function roomTile(ctx, r, i, swap, photo) {
+  return html`<div ${cell(i, swap, 'lib-room')}>
     <a class="tile tile--row" href="${ctx.href('/studio', { room: r.id })}" data-key="room-${r.id}">
-      <span class="thumb">${icon('image', { size: 22, stroke: 1.5 })}</span>
+      ${roomThumb(r, photo)}
       <span class="stack gap-6 grow">
         <span class="row between gap-8"><span class="h-item">${r.name}</span>${roomStatusPill(r)}</span>
         <span class="tiny muted">${roomMeta(r)}</span>
         <span class="lib-chips">${chipsFor(r).map(([name, text]) => html`<span class="lib-chip">${chipIcon(name)}${text}</span>`)}</span>
       </span>
     </a>
+    <button type="button" class="lib-photo-btn" data-photo="${r.id}" data-key="photo-${r.id}" aria-label="${photo ? 'Change photo for' : 'Add photo for'} ${r.name}" title="${photo ? 'Change photo' : 'Add photo'}">${icon(photo ? 'pencil' : 'plus', { size: 13, stroke: 2.2 })}</button>
   </div>`;
 }
 
@@ -125,6 +127,7 @@ function openNewRoom(ctx, { rooms, typeId, onClose }) {
       <label class="field"><span class="field__label">Level</span><input class="input" name="level" required maxlength="12" placeholder="e.g. L2" autocomplete="off"></label>
       <label class="field"><span class="field__label">Area (m²)</span><input class="input" name="area" type="number" inputmode="numeric" min="10" max="600" step="1" required placeholder="e.g. 58"></label>
       <label class="field"><span class="field__label">Starting type</span><select class="select" name="type">${TYPES.map((t) => html`<option value="${t.id}" ${t.id === typeId ? raw('selected') : ''}>${t.num} · ${t.name}</option>`)}</select></label>
+      <label class="field lib-form__wide"><span class="field__label">Photo (optional)</span><input class="input lib-file" type="file" name="photo" accept="image/*"></label>
     </div>
     <div class="dialog__actions">
       <button type="button" class="btn" data-cancel>Cancel</button>
@@ -147,7 +150,12 @@ function openNewRoom(ctx, { rooms, typeId, onClose }) {
     };
     const btn = $('button[type="submit"]', form);
     try {
-      const room = await withSpinner(btn, () => api.addRoom(payload), { busyLabel: 'Adding…' });
+      const photoFile = fd.get('photo');
+      const room = await withSpinner(btn, async () => {
+        const added = await api.addRoom(payload);
+        if (photoFile && photoFile.size) { try { await setPhoto(added.id, photoFile); } catch (err) { console.error(err); toast('The classroom was added, but its photo could not be saved.', { kind: 'error' }); } }
+        return added;
+      }, { busyLabel: 'Adding…' });
       if (!room) return; // the button was already busy
       close();
       toast('Classroom added');
@@ -164,6 +172,7 @@ function openNewRoom(ctx, { rooms, typeId, onClose }) {
 export default async function page(ctx) {
   await loadStyle(new URL('./library.css', import.meta.url));
   const rooms = await api.getRooms();
+  const photos = await photoUrlsFor(rooms);
 
   let filter = 'all';
   let queryRaw = String(ctx.query.get('q') || '').trim();
@@ -223,7 +232,7 @@ export default async function page(ctx) {
   function renderRooms(swap = false) {
     const list = visibleRooms();
     const nodes = list.length
-      ? list.map((r, i) => roomTile(ctx, r, i + 1, swap))
+      ? list.map((r, i) => roomTile(ctx, r, i + 1, swap, photos[r.id]))
       : [spanCell(swap, emptyState(
         rooms.length ? 'No classrooms match' : 'No classrooms yet',
         rooms.length ? `Nothing in your list matches “${queryRaw}”.` : 'Add a classroom to start planning it in the Design Studio.',
@@ -255,11 +264,33 @@ export default async function page(ctx) {
     dialog = openNewRoom(ctx, { rooms, typeId: filter !== 'all' && first ? first.id : TYPES[0].id, onClose: () => { dialog = null; } });
   });
 
+  // Add or change a classroom photo from its card (stored on this device, resized on the way in).
+  on(el, 'click', '[data-photo]', async (e, btn) => {
+    e.preventDefault();
+    const id = btn.dataset.photo;
+    const room = rooms.find((r) => r.id === id);
+    const file = await pickImage();
+    if (!file || !room) return;
+    btn.disabled = true; btn.innerHTML = '<span class="spinner" aria-hidden="true" style="width:12px;height:12px;flex-basis:12px"></span>';
+    try {
+      photos[id] = await setPhoto(id, file);
+      renderRooms(true);
+      toast(`Photo added to ${room.name}`);
+    } catch (err) {
+      console.error(err);
+      renderRooms(true);
+      toast(err && err.message ? err.message : 'That photo could not be saved.', { kind: 'error' });
+    }
+  });
+  const onPhoto = (e) => { if (e.detail && e.detail.roomId in photos) { photos[e.detail.roomId] = e.detail.url || rooms.find((r) => r.id === e.detail.roomId)?.photo || null; renderRooms(true); } };
+  window.addEventListener('app:photo', onPhoto);
+
   // Live search from the header (debounced by the shell).
   const onSearch = (e) => { if (e.detail && typeof e.detail.query === 'string') update({ query: e.detail.query }); };
   window.addEventListener('app:search', onSearch);
   ctx.onCleanup(() => {
     window.removeEventListener('app:search', onSearch);
+    window.removeEventListener('app:photo', onPhoto);
     if (dialog) dialog.close();
   });
 

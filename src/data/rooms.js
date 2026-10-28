@@ -1,4 +1,7 @@
 // Seed classroom records (illustrative example data from the design).
+// Optional `photo`: a path under assets/ (e.g. './assets/img/classrooms/sr01.jpg') shown on the
+// classroom cards. Photos added inside the app are stored on the device (src/lib/photos.js)
+// and take precedence over this field.
 export const ROOMS = [
   { id: 'sr01', name: 'Seminar Room 01', building: 'Teaching Block A', level: 'L2', area: 58, status: 'in-review', type: 'low-light',
     lightingLabel: 'Fluorescent', cond: { daylight: 'low', lighting: 'fluorescent', glare: 'none', plants: 'none', walls: 'glossy', size: 'standard' } },
