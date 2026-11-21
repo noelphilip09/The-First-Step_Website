@@ -80,3 +80,19 @@ Each classroom card can show a photo. Two ways to add one:
 ## Classroom records (optional)
 
 By default a classroom type card opens the Design Studio directly at the Conditions step, on a working classroom created for that type. Two options in Settings → Classrooms turn the classroom-record features back on: the "Your classrooms" list in the Library (with photos and Add classroom) and the "Classroom" step in the Design Studio. Both are stored in `settings.showLibraryClassrooms` / `settings.showStudioClassroomStep`.
+
+## Official website (`website/`)
+
+The marketing site from the Figma section "The First Step Official Website". It is separate from the
+toolkit app above and shares nothing with it except `assets/fonts` and the dev server:
+
+```bash
+python3 scripts/serve.py 5174
+```
+
+then open http://127.0.0.1:5174/website/.
+
+- `website/index.html` — one page: loader, navbar, hero, about, how it works (seven steps), key components, team, footer.
+- `website/styles.css` — two layouts on one DOM. `html.stage` is the designed 1728 × 1265 canvas; the default is a stacked layout for phones, tablets and portrait windows.
+- `website/main.js` — the scroll timeline. The Figma file is a storyboard of 16 frames, each the same page at a later scroll position; `LAYERS` holds every layer's position in each frame and the script interpolates between them as the page scrolls, which is where the parallax comes from. `S` holds the scroll position of each frame; change those to make a section scroll for longer or shorter.
+- `website/assets/` — images and SVGs exported from the Figma file.

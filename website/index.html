@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The First Step — Calmer classrooms start here</title>
+<meta name="description" content="The First Step is a design toolkit that turns existing classrooms into neuro-inclusive spaces. No rebuild required.">
+<link rel="icon" href="./assets/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600;700&family=Lato:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script>document.documentElement.classList.add('js');</script>
+<script type="module" src="./main.js"></script>
+</head>
+<body>
+
+<!-- Loader: the four logo shapes trade places, the wordmark opens, the sheet lifts -->
+<div id="loader" class="loader" aria-hidden="true">
+  <div class="loader-logo">
+    <div class="loader-mark">
+      <span class="lq lq-a"><img src="./assets/loader-mark.svg" alt=""></span>
+      <span class="lq lq-b"><img src="./assets/loader-mark.svg" alt=""></span>
+      <span class="lq lq-c"><img src="./assets/loader-mark.svg" alt=""></span>
+      <span class="lq lq-d"><img src="./assets/loader-mark.svg" alt=""></span>
+    </div>
+    <div class="loader-word">
+      <div class="loader-word-in">
+        <img src="./assets/loader-word.svg" alt="">
+        <span>Strategy Initiative</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="track" aria-hidden="true"></div>
+
+<div id="stage">
+<div id="canvas">
+
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="fade fade-bottom" data-l="fadeBottom" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <header class="nav" data-l="nav">
+    <a class="brand" href="#home" data-go="home" aria-label="The First Step — home">
+      <img class="brand-mark" src="./assets/logo-mark.svg" alt="">
+      <span class="brand-word">
+        <img src="./assets/logo-word.svg" alt="The First Step">
+        <span class="brand-tag">Strategy Initiative</span>
+      </span>
+    </a>
+    <nav class="menu" aria-label="Primary">
+      <a class="btn-nav" href="#home" data-go="home">Home</a>
+      <a class="btn-nav" href="#about" data-go="about">About</a>
+      <a class="btn-nav" href="#how" data-go="how">How it works</a>
+      <a class="btn-nav" href="#components" data-go="components">Key Components</a>
+      <a class="btn-nav" href="#team" data-go="team">The Team</a>
+    </nav>
+    <a class="btn-primary" href="#contact" data-go="contact"><span class="btn-dot" aria-hidden="true"></span><span class="btn-label">Contact Us</span></a>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section id="home" class="sec sec-hero">
+      <div class="leaf leaf-l" data-l="leafL" aria-hidden="true"><div class="intro intro-leaf-l"><div class="leaf-rot"><div class="crop" style="--w:393.51%;--h:325.51%;--l:-0.86%;--t:-130.13%"><img src="./assets/leaves.png" alt=""></div></div></div></div>
+      <div class="leaf leaf-r" data-l="leafR" aria-hidden="true"><div class="intro intro-leaf-r"><div class="leaf-rot"><div class="crop" style="--w:393.51%;--h:304.6%;--l:-6.09%;--t:-14.75%"><img src="./assets/leaves.png" alt=""></div></div></div></div>
+
+      <div class="hero" data-l="hero">
+        <div class="hero-copy intro intro-copy">
+          <h1 class="display"><span class="sans">Calmer classrooms</span> <em>start here.</em></h1>
+          <p class="lede">The First Step is a design toolkit that turns existing classrooms into neuro-inclusive spaces. No rebuild required.</p>
+        </div>
+        <div class="hero-mac intro intro-mac"><div class="crop" style="--w:169.11%;--h:170.74%;--l:-35.26%;--t:-29.79%"><img src="./assets/macbook.png" alt="The First Step Design Studio shown on a laptop"></div></div>
+        <div class="hero-card intro intro-card">
+          <article class="card card-plant">
+            <div class="card-photo"><div class="crop" style="--w:361.11%;--h:433.33%;--l:-200.21%;--t:-225.96%"><img src="./assets/spider-plant.jpg" alt="Spider plant in a white pot"></div></div>
+            <div class="card-head">
+              <div><h3 class="card-title">Spider Plant</h3><p class="card-sub">Chlorophytum comosum</p></div>
+              <span class="badge"><img src="./assets/icon-happy-lg.svg" alt="">Non-toxic</span>
+            </div>
+            <ul class="card-rows">
+              <li><img src="./assets/icon-sun-lg.svg" alt="">Low -moderate light</li>
+              <li><img src="./assets/icon-drop-lg.svg" alt="">Moderate watering</li>
+              <li><img src="./assets/icon-leaf-lg.svg" alt="">Easy to propogate</li>
+            </ul>
+          </article>
+        </div>
+        <div class="hero-book intro intro-book"><img src="./assets/booklet.png" alt="Colour Considerations booklet"></div>
+        <div class="fade hero-fade" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="sec sec-about">
+      <div class="about-leaves" data-l="aboutLeaves" aria-hidden="true">
+        <div class="crop" style="--w:393.51%;--h:304.6%;--l:-105.98%;--t:-121.96%"><img src="./assets/leaves.png" alt=""></div>
+        <div class="fade about-leaves-fade"></div>
+      </div>
+      <div class="floater fl-swatch" data-l="flSwatch" aria-hidden="true"><span></span></div>
+      <div class="floater fl-plant" data-l="flPlant" aria-hidden="true"><div class="crop" style="--w:123.58%;--h:180.12%;--l:-8.18%;--t:-58.4%"><img src="./assets/pothos.png" alt=""></div></div>
+      <div class="floater fl-light" data-l="flLight" aria-hidden="true"><span><span class="crop" style="--w:120.92%;--h:68.02%;--l:-9.76%;--t:24.76%"><img src="./assets/light-crop.png" alt=""></span></span></div>
+
+      <div class="about-text" data-l="aboutText">
+        <h2 class="about-title">About <br>The First Step</h2>
+        <div class="about-body reveal-words" data-words="about">
+          <p><span class="lit">The First Step is a biophilic design strategy for neuro-inclusive classrooms.</span> <span class="dim">Most learning spaces were built without sensory needs in mind, and most cannot be rebuilt. So we start with the rooms that already exist.</span></p>
+          <p><span class="dim">Adjustable lighting, muted colour and living plants bring nature indoors. They lower sensory load for neurodivergent students and staff, and make the room calmer for everyone in it.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works (pinned panel, seven steps) -->
+    <section id="how" class="sec sec-how">
+      <div class="panel" data-l="panel">
+        <div class="how-inner" data-l="howInner">
+          <div class="how-head">
+            <span class="pill">How it Works</span>
+            <h2 class="display">From any classroom to a <em>calmer one.</em></h2>
+          </div>
+          <div class="how-bar" aria-hidden="true"><span class="how-bar-fill"></span></div>
+          <ol class="how-steps">
+            <li class="step is-on">
+              <div class="step-text"><h3>Library</h3><p>Start with a room like yours. Ten classroom types give you a starting point in seconds.</p></div>
+              <div class="step-shot"><img src="./assets/screen-1.jpg" alt="Classroom Library screen: choose a classroom type to start"></div>
+            </li>
+            <li class="step">
+              <div class="step-text"><h3>Conditions</h3><p>Tell the toolkit what the room is like. Daylight, lighting, glare, plants, walls and size.</p></div>
+              <div class="step-shot"><img src="./assets/screen-2.jpg" alt="Design Studio conditions screen: what is the room like?"></div>
+            </li>
+            <li class="step">
+              <div class="step-text"><h3>Recommendations</h3><p>Get recommendations for lighting, plants and colour, matched to the room. Adjust each one to suit.</p></div>
+              <div class="step-shot"><img src="./assets/screen-3.jpg" alt="Design Studio recommendations for lighting, plants and colour"></div>
+            </li>
+            <li class="step">
+              <div class="step-text"><h3>Plan &amp; Impact</h3><p>See the plan on the floor, with the cost and energy case beside it. Save it, export it or send it for review.</p></div>
+              <div class="step-shot"><img src="./assets/screen-4.jpg" alt="Plan and impact screen with floor plan, cost and energy figures"></div>
+            </li>
+            <li class="step">
+              <div class="step-text"><h3>Light Guidelines</h3><p>Every recommendation traces back to a clear guideline. Light that is steady, warm and adjustable.</p></div>
+              <div class="step-shot"><img src="./assets/screen-5.jpg" alt="Lighting guidelines screen"></div>
+            </li>
+            <li class="step">
+              <div class="step-text"><h3>Plant Guidelines</h3><p>Easy-care greenery, placed where it is seen and kept clear of paths.</p></div>
+              <div class="step-shot"><img src="./assets/screen-6.jpg" alt="Plant guidelines screen"></div>
+            </li>
+            <li class="step">
+              <div class="step-text"><h3>Colour &amp; Material Guidelines</h3><p>Warm neutrals, muted greens and low-sheen finishes that keep the room settled.</p></div>
+              <div class="step-shot"><img src="./assets/screen-7.jpg" alt="Colour and material guidelines screen"></div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="every">
+          <div class="every-leaf every-leaf-tr" data-l="everyLeafTR" aria-hidden="true"><div class="crop" style="--w:461.79%;--h:259.24%;--l:-30.48%;--t:0%"><img src="./assets/leaves.png" alt=""></div></div>
+          <div class="every-leaf every-leaf-bl" data-l="everyLeafBL" aria-hidden="true"><div class="crop" style="--w:461.79%;--h:259.24%;--l:-168.98%;--t:-4.16%"><img src="./assets/leaves.png" alt=""></div></div>
+          <h2 class="display every-head" data-l="everyHead">Every room teaches the <em>next one.</em></h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key components -->
+    <section id="components" class="sec sec-components">
+      <div class="pendant" data-l="pendant" aria-hidden="true"><div class="crop" style="--w:497.57%;--h:407.71%;--l:-397.67%;--t:-296.93%"><img src="./assets/leaves.png" alt=""></div></div>
+      <div class="branch" data-l="branch" aria-hidden="true"><div class="crop" style="--w:541.58%;--h:443.44%;--l:-180.38%;--t:-326.96%"><img src="./assets/leaves.png" alt=""></div></div>
+
+      <p class="statement reveal-words" data-l="statement" data-words="statement"><span class="lit">A room can meet every accessibility standard and still overwhelm the people in it.</span> <span class="dim">The First Step brings nature indoors through light, colour and plants, so the room supports every kind of mind.</span></p>
+
+      <div class="cards">
+        <article class="card card-swatch" data-l="cardL">
+          <div class="card-swatch-fill"></div>
+          <div class="card-head"><h3 class="card-title">Powder Blue</h3></div>
+          <ul class="card-rows">
+            <li>CMYK:&nbsp; 21 8 0 12</li>
+            <li>RGB: 176 205 224</li>
+            <li>HEX: #B0CDE0</li>
+          </ul>
+        </article>
+        <article class="card card-light" data-l="cardR">
+          <div class="card-product"><img src="./assets/light.png" alt="FlexBlend suspended luminaire"></div>
+          <img class="card-brand" src="./assets/philips.png" alt="Philips">
+          <div class="card-head"><h3 class="card-title">FlexBlend, Suspended</h3></div>
+          <ul class="card-rows card-rows-check">
+            <li><img src="./assets/icon-check.svg" alt="">Return of investment less than 3 years</li>
+            <li><img src="./assets/icon-check.svg" alt="">Flexibility to the choice of luminaires to fit many areas</li>
+            <li><img src="./assets/icon-check.svg" alt="">Scalable and ready to be connected to controls</li>
+          </ul>
+        </article>
+        <article class="card card-plant" data-l="cardM">
+          <div class="card-photo"><div class="crop" style="--w:361.11%;--h:433.33%;--l:-200.21%;--t:-225.96%"><img src="./assets/spider-plant.jpg" alt="Spider plant in a white pot"></div></div>
+          <div class="card-head">
+            <div><h3 class="card-title">Spider Plant</h3><p class="card-sub">Chlorophytum comosum</p></div>
+            <span class="badge"><img src="./assets/icon-happy-lg.svg" alt="">Non-toxic</span>
+          </div>
+          <ul class="card-rows">
+            <li><img src="./assets/icon-sun-lg.svg" alt="">Low -moderate light</li>
+            <li><img src="./assets/icon-drop-lg.svg" alt="">Moderate watering</li>
+            <li><img src="./assets/icon-leaf-lg.svg" alt="">Easy to propogate</li>
+          </ul>
+        </article>
+      </div>
+
+      <h2 class="display kit-head" data-l="kitHead">To support all the requirements <em>We introduce a Kit of Parts</em></h2>
+      <div class="kit-note" data-l="kitNote"><span class="kit-note-bar" aria-hidden="true"></span><p>Key components that best suits classrooms for neuro-inclusivity</p></div>
+      <div class="kit-book" data-l="kitBook"><img src="./assets/booklet.png" alt="Colour Considerations booklet, open to the palette pages"></div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="sec sec-team">
+      <div class="campus" data-l="campus" aria-hidden="true"><div class="crop" style="--w:100%;--h:192.74%;--l:0%;--t:0%"><img src="./assets/campus.png" alt=""></div></div>
+      <div class="team" data-l="team">
+        <div class="team-head">
+          <span class="pill">The Team</span>
+          <h2 class="display"><span class="sans">Introducing the</span> <em>Founders of The First Step</em></h2>
+        </div>
+        <div class="team-photo"><div class="crop" style="--w:100%;--h:157.48%;--l:0%;--t:-12.73%"><img src="./assets/team.jpg" alt="The four founders of The First Step standing together outside the School of Architecture, Design and Planning"></div></div>
+      </div>
+      <div class="fade fade-bottom fade-bottom-2" data-l="fadeBottom2" aria-hidden="true"></div>
+    </section>
+
+  </main>
+
+  <div class="fade fade-top" data-l="fadeTop" aria-hidden="true"></div>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer" data-l="footer">
+    <div class="foot-leaf" aria-hidden="true"><div class="crop" style="--w:523.53%;--h:340%;--l:-305.08%;--t:-151.19%"><img src="./assets/leaves.png" alt=""></div></div>
+    <div class="foot-lamp" aria-hidden="true"><div class="crop" style="--w:434.73%;--h:164.41%;--l:-253.45%;--t:32.97%"><img src="./assets/leaves.png" alt=""></div></div>
+    <p class="foot-big" data-l="footBig" aria-hidden="true">The First Step</p>
+
+    <div class="foot-brand">
+      <div class="foot-logo">
+        <img class="foot-mark" src="./assets/footer-mark.svg" alt="">
+        <span class="foot-word"><img src="./assets/footer-word.svg" alt="The First Step"><span class="brand-tag">Strategy Initiative</span></span>
+      </div>
+      <p>The First Step is a design toolkit that turns existing classrooms into neuro-inclusive spaces. No rebuild required.</p>
+      <p>© 2026 The First Step • All rights reserved</p>
+    </div>
+
+    <div class="foot-cols">
+      <nav class="foot-col" aria-label="Footer">
+        <h2>Menu</h2>
+        <ul>
+          <li><a href="#home" data-go="home">Home</a></li>
+          <li><a href="#about" data-go="about">About</a></li>
+          <li><a href="#how" data-go="how">How it works</a></li>
+          <li><a href="#components" data-go="components">Key components</a></li>
+          <li><a href="#team" data-go="team">The Team</a></li>
+        </ul>
+      </nav>
+      <div class="foot-col">
+        <h2>The Team</h2>
+        <div class="foot-links">
+          <a class="li-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Team member 1 on LinkedIn"><span class="li-avatar"><span class="crop" style="--w:449.35%;--h:337.01%;--l:-88.76%;--t:-35.23%"><img src="./assets/team.jpg" alt=""></span></span><img class="li-logo" src="./assets/linkedin.svg" alt="LinkedIn"></a>
+          <a class="li-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Team member 2 on LinkedIn"><span class="li-avatar"><span class="crop" style="--w:449.35%;--h:337.01%;--l:-182.37%;--t:-58.44%"><img src="./assets/team.jpg" alt=""></span></span><img class="li-logo" src="./assets/linkedin.svg" alt="LinkedIn"></a>
+          <a class="li-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Team member 3 on LinkedIn"><span class="li-avatar"><span class="crop" style="--w:449.35%;--h:337.01%;--l:-230.98%;--t:-72.2%"><img src="./assets/team.jpg" alt=""></span></span><img class="li-logo" src="./assets/linkedin.svg" alt="LinkedIn"></a>
+          <a class="li-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Team member 4 on LinkedIn"><span class="li-avatar"><span class="crop" style="--w:449.35%;--h:337.01%;--l:-139.76%;--t:-76.44%"><img src="./assets/team.jpg" alt=""></span></span><img class="li-logo" src="./assets/linkedin.svg" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+</body>
+</html>

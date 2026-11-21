@@ -18,9 +18,13 @@ class Handler(SimpleHTTPRequestHandler):
         if '404' in (args[1] if len(args) > 1 else ''):
             super().log_message(fmt, *args)
 
+class Server(ThreadingHTTPServer):
+    # The default backlog (5) resets connections when a page requests dozens of assets at once.
+    request_queue_size = 128
+
 if __name__ == '__main__':
     try:
-        httpd = ThreadingHTTPServer(('127.0.0.1', PORT), Handler)
+        httpd = Server(('127.0.0.1', PORT), Handler)
     except OSError as e:
         if getattr(e, 'errno', None) == 48:
             sys.exit(f'Port {PORT} is already in use (another copy of this server?). '
