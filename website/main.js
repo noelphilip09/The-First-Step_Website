@@ -16,7 +16,8 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const stageQuery = matchMedia('(min-width: 900px) and (min-aspect-ratio: 23/20)');
 
 /* ---------- Scroll positions of the storyboard frames (design px of scroll) ---------- */
-const STEP = 700;           // scroll per "How it works" step
+const STEP = 900;           // scroll per "How it works" step
+const HOLD = .6;            // share of each step's scroll where the screen sits still and sharp
 const S = {};
 S.H = 0;                    // frame 1   hero
 S.A = 980;                  // frame 11  about
@@ -187,7 +188,10 @@ function render(s) {
   }
 
   // How it works: the seven steps cross-fade inside the pinned panel
-  const f = clamp((s - S.W1) / STEP, 0, 6);
+  // Each step holds still for HOLD of its scroll, then hands over to the next in the remainder
+  const raw = clamp((s - S.W1) / STEP, 0, 6);
+  const ri = Math.min(5, Math.floor(raw));
+  const f = raw >= 6 ? 6 : ri + io(clamp((raw - ri - HOLD) / (1 - HOLD)));
   steps.forEach((st, i) => {
     const d = f - i;                                   // 0 = this step is centred
     const o = clamp((.5 - Math.abs(d)) / .22 + .5);
@@ -196,11 +200,11 @@ function render(s) {
     st.shot.style.opacity = o.toFixed(3);
     st.shot.style.transform = `translate3d(0,${(-d * 70).toFixed(1)}px,0) scale(${(1 - Math.min(.04, Math.abs(d) * .06)).toFixed(4)})`;
     st.shot.style.zIndex = Math.round(10 - Math.abs(d) * 4);
-    const blur = Math.min(18, Math.abs(d) * 34);          // the screenshot blurs as it travels, sharp when settled
+    const blur = Math.min(14, Math.abs(d) * 30);          // the screenshot blurs as it travels, sharp when settled
     st.shot.style.filter = blur > .4 ? `blur(${blur.toFixed(1)}px)` : 'none';
   });
   const i0 = Math.floor(f), t = f - i0;
-  const h = HOW_FILL[i0] + ((HOW_FILL[Math.min(6, i0 + 1)] - HOW_FILL[i0]) * io(t));
+  const h = HOW_FILL[i0] + ((HOW_FILL[Math.min(6, i0 + 1)] - HOW_FILL[i0]) * t);
   howFill.style.height = h.toFixed(1) + 'px';
 
   revealWords('about', (s - S.A + 30) / (S.A2 - S.A - 60));
@@ -243,6 +247,49 @@ function onScroll() {
   if (!raf) raf = requestAnimationFrame(tick);
 }
 
+/* ---------- Stacked layout: the three kit cards are a carousel that loops forever ---------- */
+const cardsBox = $('.cards');
+const cardEls = $$('.card', cardsBox);
+let cardClones = null, cardsTimer = 0;
+const cardsSetW = () => cardClones[cardEls.length].offsetLeft - cardEls[0].offsetLeft;   // one full set of cards
+function centreCard(el) { cardsBox.scrollLeft = el.offsetLeft - (cardsBox.clientWidth - el.offsetWidth) / 2; }
+function setupCards() {
+  if (cardClones) return;
+  const copy = () => cardEls.map(c => {
+    const n = c.cloneNode(true);
+    n.removeAttribute('data-l'); n.removeAttribute('style');
+    n.classList.add('card-clone'); n.setAttribute('aria-hidden', 'true');
+    return n;
+  });
+  const before = copy(), after = copy();
+  cardsBox.prepend(...before); cardsBox.append(...after);
+  cardClones = [...before, ...after];
+  requestAnimationFrame(() => centreCard(cardEls[cardEls.length - 1]));      // start on the plant card
+  cardsBox.addEventListener('scroll', () => {
+    clearTimeout(cardsTimer);
+    cardsTimer = setTimeout(() => {                    // once the swipe settles, hop back into the middle set
+      if (stage) return;
+      const w = cardsSetW(), base = cardEls[0].offsetLeft, mid = cardsBox.scrollLeft + cardsBox.clientWidth / 2;
+      if (mid < base) cardsBox.scrollLeft += w; else if (mid > base + w) cardsBox.scrollLeft -= w;
+    }, 120);
+  }, { passive: true });
+}
+
+/* ---------- "Best viewed on a laptop or desktop" notice for the stacked layout ---------- */
+const notice = $('#notice');
+let noticeDone = false;
+try { noticeDone = sessionStorage.getItem('fs-notice') === '1'; } catch {}
+function showNotice(want) {
+  const on = want && !noticeDone;
+  notice.hidden = !on;
+  root.classList.toggle('notice-open', on);
+}
+$('#notice-go').addEventListener('click', () => {
+  noticeDone = true;
+  try { sessionStorage.setItem('fs-notice', '1'); } catch {}
+  showNotice(false);
+});
+
 /* ---------- Layout ---------- */
 function measure() {
   const vw = root.clientWidth, vh = innerHeight;
@@ -282,7 +329,8 @@ function setMode() {
     removeEventListener('scroll', onScroll);
     clearStage();
   }
-  if (stage) measure(); else { root.style.setProperty('--k', Math.min(1, root.clientWidth / 520).toFixed(3)); Object.keys(words).forEach(key => revealWords(key, 1)); }
+  if (stage) measure(); else { root.style.setProperty('--k', Math.min(1, root.clientWidth / 520).toFixed(3)); Object.keys(words).forEach(key => revealWords(key, 1)); setupCards(); }
+  showNotice(!stage);
 }
 
 /* ---------- Navigation ---------- */
@@ -299,7 +347,7 @@ document.addEventListener('click', ev => {
 });
 
 /* ---------- Stacked layout: reveal blocks as they enter ---------- */
-const riseEls = $$('.hero-copy, .hero-mac, .about-text, .how-head, .how-steps, .every, .statement, .card, .kit-head, .kit-note, .kit-book, .team-head, .team-photo, .foot-brand, .foot-col');
+const riseEls = $$('.hero-copy, .hero-mac, .about-text, .how-head, .how-steps, .every, .statement, .cards, .kit-head, .kit-note, .kit-book, .team-head, .team-photo, .foot-brand, .foot-col');
 riseEls.forEach(el => el.classList.add('rise'));
 const riseIO = new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); riseIO.unobserve(en.target); } });
