@@ -4,8 +4,8 @@
    - default     : a stacked, responsive layout for phones, tablets and no-JS
    All stage measurements are the Figma frame's pixels. */
 
-@font-face { font-family: "Helvetica Toolkit"; src: url("../assets/fonts/HelveticaToolkit-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Helvetica Toolkit"; src: url("../assets/fonts/HelveticaToolkit-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+/* Inter, self-hosted as one variable file (weights 100–900). Its optical-size axis switches to the Display cut at large sizes automatically. */
+@font-face { font-family: "Inter Variable"; src: url("./assets/fonts/InterVariable.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
 :root {
   --bg: #f6f4ec;
@@ -17,8 +17,7 @@
   --dim: #909090;
   --body: #4e4e4e;
   --loader: #f5f1e4;
-  --helv: Helvetica, "Helvetica Toolkit", "Helvetica Neue", Arial, sans-serif;
-  --inter: Inter, "Helvetica Neue", Arial, sans-serif;
+  --inter: "Inter Variable", Inter, "Helvetica Neue", Arial, sans-serif;
   --lato: Lato, "Helvetica Neue", Arial, sans-serif;
   --serif: "Instrument Serif", "Times New Roman", serif;
   --ease-out: cubic-bezier(.22, 1, .36, 1);
@@ -40,20 +39,20 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Shared components ---------- */
 
-.display { font-family: var(--helv); font-weight: 400; font-size: 64px; line-height: 1.01; color: var(--ink); text-align: center; }
+.display { font-family: var(--inter); font-weight: 400; font-size: 64px; line-height: 1.01; color: var(--ink); text-align: center; }
 .display .sans { font-family: var(--inter); font-weight: 500; }
 .display em { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.125em; }
 
 .pill { display: inline-flex; align-items: center; justify-content: center; padding: 12px; background: #fff; border: 1px solid #e5e5e5; border-radius: 37px; font-family: var(--inter); font-size: 16px; line-height: 1.2; letter-spacing: 2.56px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
 
 /* Button (nav item): Default → Variant2 on hover / current section */
-.btn-nav { display: inline-grid; place-items: center; padding: 14px; border-radius: 46px; font-family: var(--helv); font-size: 14px; line-height: normal; color: #000; white-space: nowrap; transition: background-color .25s ease, color .25s ease; }
+.btn-nav { display: inline-grid; place-items: center; padding: 14px; border-radius: 46px; font-family: var(--inter); font-size: 14px; line-height: normal; color: #000; white-space: nowrap; transition: background-color .25s ease, color .25s ease; }
 .btn-nav::after { content: attr(data-label); grid-area: 1 / 1; font-weight: 700; visibility: hidden; height: 0; }
 .btn-nav > span { grid-area: 1 / 1; }
 .btn-nav:hover, .btn-nav.is-current { background: var(--mint); color: var(--green); font-weight: 700; }
 
 /* Primary Button: the teal dot waits under the label and floods the pill on hover */
-.btn-primary { border: 0; cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 14px; border-radius: 46px; background: var(--green); overflow: hidden; font-family: var(--helv); font-size: 14px; line-height: normal; color: #fff; white-space: nowrap; flex: none; }
+.btn-primary { border: 0; cursor: pointer; position: relative; display: inline-flex; align-items: center; justify-content: center; padding: 14px; border-radius: 46px; background: var(--green); overflow: hidden; font-family: var(--inter); font-size: 14px; line-height: normal; color: #fff; white-space: nowrap; flex: none; }
 .btn-primary .btn-dot { position: absolute; left: 36px; top: 55px; width: 26px; height: 26px; border-radius: 50%; background: var(--teal); transition: left .45s var(--ease-out), top .45s var(--ease-out), width .45s var(--ease-out), height .45s var(--ease-out); }
 .btn-primary .btn-label { position: relative; transition: color .3s ease; }
 .btn-primary:hover .btn-dot, .btn-primary:focus-visible .btn-dot { left: -6.5px; top: -30px; width: 111px; height: 111px; }
@@ -74,7 +73,7 @@ a { color: inherit; text-decoration: none; }
 .card-product img { width: 100%; height: 100%; object-fit: cover; }
 .card-brand { position: absolute; right: 22.92px; top: 21.92px; width: 64px; height: 34px; object-fit: cover; }
 .card-head { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-.card-title { font-family: var(--helv); font-weight: 700; font-size: 15.49px; line-height: normal; color: #1c2420; }
+.card-title { font-family: var(--inter); font-weight: 700; font-size: 15.49px; line-height: normal; color: #1c2420; }
 .card-sub { margin-top: 3.913px; width: 123.265px; font-family: var(--lato); font-size: 12.392px; line-height: normal; color: #676767; }
 .badge { display: inline-flex; align-items: center; gap: 3.261px; padding: 3.261px; border-radius: 999px; background: #e5efde; font-family: var(--inter); font-weight: 600; font-size: 12.392px; line-height: normal; color: #17413f; white-space: nowrap; }
 .badge img { width: 11.74px; height: 11.74px; }
