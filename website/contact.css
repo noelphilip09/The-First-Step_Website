@@ -1,0 +1,95 @@
+/* Contact us page. Loads after styles.css and reuses its tokens, buttons, pill, display type and footer.
+   Wide windows (.is-desk, set by contact.js) lay the page out in the Figma frame's pixels (1728 × 1870)
+   and scale it to the window with `zoom`; narrower windows use the fluid rules at the top. */
+
+.cpage { position: relative; overflow-x: clip; }
+.cpage .bg-grid { display: none; }
+
+.c-main { max-width: 1000px; margin: 0 auto; padding: 40px 20px 56px; }
+.c-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.c-head .display { margin-top: 21px; line-height: 1.2; }
+.c-head .lede { margin-top: 11px; }
+.c-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 40px; }
+
+/* ---------- Team card (359 × 454 in the design; everything inside scales with the card's width) ---------- */
+.tcard-slot { perspective: 1100px; container-type: inline-size; }
+.tcard { display: block; aspect-ratio: 359 / 454; border-radius: 6.685cqw; outline-offset: 4px;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--sc, 1)); transform-style: preserve-3d;
+  transition: transform .5s var(--ease-out); will-change: transform; }
+.tcard.is-tilting { transition: transform .12s linear; }
+.tcard-in { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border: 1px solid #d1dfd4; border-radius: 6.685cqw; background: #dbe4dd;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .1); transition: box-shadow .4s ease; }
+.tcard:hover .tcard-in, .tcard:focus-visible .tcard-in { box-shadow: 0 22px 44px rgba(22, 54, 44, .22); }
+
+.tcard-photo { position: absolute; display: block; overflow: hidden; pointer-events: none; }
+.tcard-photo img { position: absolute; max-width: none; transition: transform .6s var(--ease-out); }
+.tcard:hover .tcard-photo img { transform: scale(1.04); }
+.tcard-photo-1 { inset: 0; }
+.tcard-photo-1 img { width: 129.25%; height: 102.2%; left: -14.48%; top: 6.91%; }
+.tcard-photo-2 { left: -14.76%; top: -32.6%; width: 125.9%; height: 149.34%; }
+.tcard-photo-2 img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tcard-photo-3 { left: 0; top: 2.86%; width: 100%; height: 100%; }
+.tcard-photo-3 img { width: 158.22%; height: 158.37%; left: -29.11%; top: -17.54%; }
+.tcard-photo-4 { inset: 0; }
+.tcard-photo-4 img { width: 99.85%; height: 99.92%; left: .13%; top: .08%; }
+
+.tcard-deco { position: absolute; display: block; pointer-events: none; transition: transform .7s var(--ease-out); }
+.tcard-deco-sun { left: 81.62%; top: -2.2%; width: 24.23%; height: auto; }
+.tcard-deco-leaf { left: 82.45%; top: -.22%; width: 23.4%; height: auto; }
+.tcard-deco-circle { left: 78%; top: -2.42%; width: 28.41%; height: auto; }
+.tcard-deco-stairs { left: 71.87%; top: -2.64%; width: 29.81%; aspect-ratio: 107 / 102; }
+.tcard-deco-stairs img { position: absolute; left: 50%; top: 50%; width: 95.33%; max-width: none; transform: translate(-50%, -50%) rotate(-90deg); }
+.tcard:hover .tcard-deco-sun { transform: rotate(40deg); }
+.tcard:hover .tcard-deco-leaf { transform: rotate(-12deg) scale(1.06); }
+.tcard:hover .tcard-deco-circle { transform: scale(1.1); }
+.tcard:hover .tcard-deco-stairs { transform: translate(-3%, 4%); }
+
+.tcard-label { position: absolute; left: 5.29%; top: 75.33%; width: 88.86%; height: 20.04%; display: block; border-radius: 3.343cqw; background: #fff; overflow: hidden; }
+.tcard-name, .tcard-role { position: absolute; left: 4.74cqw; font-family: var(--inter); font-size: 5.571cqw; line-height: 1.26; white-space: nowrap; }
+.tcard-name { top: 4.457cqw; font-weight: 600; color: var(--ink); }
+.tcard-role { top: 13.93cqw; font-weight: 400; color: #636363; }
+.tcard-li { position: absolute; right: 4.457cqw; top: 50%; width: 13.93cqw; height: 13.93cqw; margin-top: -6.96cqw; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #0a66c2; transition: transform .4s var(--ease-out); }
+.tcard-li img { width: 6.298cqw; height: auto; }
+.tcard:hover .tcard-li { transform: scale(1.1); }
+
+/* ---------- Entrance: the heading drops in, the cards deal out from the left, the footer rises ---------- */
+.js .cpage .c-head, .js .cpage .tcard-slot, .js .cpage .footer { transition: transform 1.15s var(--ease-out), opacity .7s ease; }
+.js .cpage .tcard-slot { transition-delay: calc(.12s + (3 - var(--i)) * .07s); }
+.js .cpage .footer { transition-delay: .1s; }
+.js .cpage:not(.is-in) .c-head { transform: translateY(-60px); opacity: 0; }
+.js .cpage:not(.is-in) .tcard-slot { transform: translateX(-70px); opacity: 0; }
+.js .cpage:not(.is-in) .footer { transform: translateY(80px); opacity: 0; }
+
+/* ---------- Wide layout: the Figma frame ---------- */
+.cpage.is-desk { width: 1728px; height: 1870px; overflow: visible; }
+.cpage.is-desk .bg-grid { display: block; position: absolute; left: -8px; top: 99px; width: 1728px; height: 1027.5px; background: url("./assets/grid.png") center / cover no-repeat; }
+
+.cpage.is-desk .nav { position: fixed; z-index: 20; left: 110px; top: 47px; width: 1508px; height: 62px; padding: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.cpage.is-desk .menu { position: absolute; left: 50%; top: 0; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 8px 25px; border: 1px solid #efefef; border-radius: 65px; background: rgba(255, 255, 255, .5); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); box-shadow: 0 4px 19.6px rgba(0, 0, 0, .1); }
+.cpage.is-desk .btn-nav { padding: 14px; }
+.cpage.is-desk .brand-word { gap: 2.037px; }
+
+.cpage.is-desk .c-main { position: absolute; inset: 0; max-width: none; margin: 0; padding: 0; }
+.cpage.is-desk .c-head { position: absolute; left: 576px; top: 208px; width: 575px; }
+.cpage.is-desk .c-head .display { font-size: 64px; line-height: 1.26; white-space: nowrap; }
+.cpage.is-desk .c-head .display em { line-height: 1.26; }
+.cpage.is-desk .c-head .lede { max-width: none; width: 100%; }
+.cpage.is-desk .c-cards { position: absolute; left: 110px; top: 549px; width: 1508px; display: grid; grid-template-columns: repeat(4, 359px); gap: 24px; margin: 0; }
+
+/* start state from the first frame: heading above the page, every card stacked off the left edge, footer below */
+.js .cpage.is-desk:not(.is-in) .c-head { transform: translateY(-520px); opacity: 1; }
+.js .cpage.is-desk:not(.is-in) .tcard-slot { transform: translateX(calc(-471px - var(--i) * 383px)); opacity: 1; }
+.js .cpage.is-desk:not(.is-in) .footer { transform: translateY(680px); opacity: 1; }
+
+html:not(.stage) .cpage.is-desk .footer { position: absolute; left: 20px; top: 1211px; display: block; width: 1688px; height: 630px; margin: 0; padding: 0; border-radius: 40px; }
+html:not(.stage) .cpage.is-desk .footer .foot-brand { position: absolute; left: 88px; top: 93px; width: 302px; z-index: 1; }
+html:not(.stage) .cpage.is-desk .footer .foot-word { gap: 2.945px; }
+html:not(.stage) .cpage.is-desk .footer .foot-cols { position: absolute; left: 605px; top: 101px; width: 941px; display: flex; flex-wrap: nowrap; gap: 2px; margin: 0; z-index: 1; }
+html:not(.stage) .cpage.is-desk .footer .foot-col { width: 306px; min-width: 0; flex: none; }
+html:not(.stage) .cpage.is-desk .footer .foot-leaf { position: absolute; left: -167px; top: 256px; bottom: auto; width: 510px; height: 523px; aspect-ratio: auto; }
+html:not(.stage) .cpage.is-desk .footer .foot-lamp { position: absolute; left: auto; right: -40px; top: -252px; width: 297px; height: 523px; aspect-ratio: auto; }
+html:not(.stage) .cpage.is-desk .footer .foot-big { position: absolute; left: 0; right: 0; top: 444px; z-index: 0; margin: 0; text-align: center; font-size: 201.789px; line-height: 1.4; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .cpage .c-head, .js .cpage .tcard-slot, .js .cpage .footer, .tcard, .tcard-photo img, .tcard-deco, .tcard-li { transition-duration: .01s; transition-delay: 0s; }
+}

@@ -389,6 +389,11 @@ const assetsReady = Promise.race([
 ]);
 Promise.all([minLoader, assetsReady]).then(() => {
   root.classList.add('loaded');
+  // Arriving from another page with a section in the address (index.html#about): go straight there
+  const startId = location.hash.slice(1);
+  if (startId && startId !== 'home' && GOTO[startId] !== undefined) {
+    if (stage) scrollTo(0, Math.round(GOTO[startId] * k)); else $(SECTION[startId])?.scrollIntoView();
+  }
   // Anything already on screen shows straight away rather than waiting on the observer
   riseEls.forEach(el => { const r = el.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) el.classList.add('in'); });
   setTimeout(() => $('#loader')?.remove(), 1400);

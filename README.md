@@ -95,4 +95,5 @@ then open http://127.0.0.1:5174/website/.
 - `website/index.html` — one page: loader, navbar, hero, about, how it works (seven steps), key components, team, footer.
 - `website/styles.css` — two layouts on one DOM. `html.stage` is the designed 1728 × 1265 canvas; the default is a stacked layout for phones, tablets and portrait windows.
 - `website/main.js` — the scroll timeline. The Figma file is a storyboard of 16 frames, each the same page at a later scroll position; `LAYERS` holds every layer's position in each frame and the script interpolates between them as the page scrolls, which is where the parallax comes from. `S` holds the scroll position of each frame; change those to make a section scroll for longer or shorter.
+- `website/contact.html`, `contact.css`, `contact.js` — the Contact us page (the navbar's Contact Us button opens it). Wide windows show the 1728 × 1870 Figma frame scaled with `zoom`; the entrance (heading drops, cards deal out from the left, footer rises) and the cards' 3D hover live here.
 - `website/assets/` — images and SVGs exported from the Figma file.
