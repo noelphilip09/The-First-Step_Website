@@ -42,6 +42,8 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
    to the left/right window edge. ---------- */
 const footerZ = v => v.V - 652;
 const panelFit = v => Math.min(1, (v.V - 175) / 1063);
+// Statement + kit cards (design y 327…1040): lifted so the block sits centred between the navbar and the window's bottom edge
+const compShift = v => clamp(109 + (v.V - 109 - 713) / 2 - 327, -170, 0);
 const panelW = v => (1688 + 2 * v.m) / panelFit(v);      // edge to edge once the fit scale is applied
 
 const LAYERS = {
@@ -74,10 +76,10 @@ const LAYERS = {
   everyLeafTR:{ keys: [[S.W7, { x: 240, y: -230 }], [S.E, { x: 0, y: 0, e: io }]] },
   everyLeafBL:{ keys: [[S.W7, { x: -260, y: 265 }], [S.E, { x: 0, y: 0, e: io }]] },
 
-  statement:  { keys: [[S.E, { x: 429, y: v => v.V + 42 }], [S.T, { y: 327 }], [S.F, { y: 327 }], [S.K, { y: -709 }]] },
-  cardL:      { origin: 'center', keys: [[S.E, { x: 559, y: v => v.V + 296, r: 0 }], [S.T, { y: 581 }], [S.F, { x: 219.8, y: 581.3, r: -11.9, e: io }], [S.K, { y: -455 }]] },
-  cardR:      { origin: 'center', keys: [[S.E, { x: 812, y: v => v.V + 296, r: 0 }], [S.T, { y: 581 }], [S.F, { x: 1144.7, y: 575, r: 15, e: io }], [S.K, { y: -461 }]] },
-  cardM:      { keys: [[S.E, { x: 677.78, y: v => v.V + 296 }], [S.T, { y: 581 }], [S.F, { y: 581 }], [S.K, { y: -455 }]] },
+  statement:  { keys: [[S.E, { x: 429, y: v => v.V + 42 }], [S.T, { y: v => 327 + compShift(v) }], [S.F, {}], [S.K, { y: -709 }]] },
+  cardL:      { origin: 'center', keys: [[S.E, { x: 559, y: v => v.V + 296, r: 0 }], [S.T, { y: v => 581 + compShift(v) }], [S.F, { x: 219.8, y: v => 581.3 + compShift(v), r: -11.9, e: io }], [S.K, { y: -455 }]] },
+  cardR:      { origin: 'center', keys: [[S.E, { x: 812, y: v => v.V + 296, r: 0 }], [S.T, { y: v => 581 + compShift(v) }], [S.F, { x: 1144.7, y: v => 575 + compShift(v), r: 15, e: io }], [S.K, { y: -461 }]] },
+  cardM:      { keys: [[S.E, { x: 677.78, y: v => v.V + 296 }], [S.T, { y: v => 581 + compShift(v) }], [S.F, {}], [S.K, { y: -455 }]] },
   pendant:    { ax: 1,  keys: [[S.E, { x: 1396, y: -319, s: .788 }], [S.T, { x: 1349, y: 0, s: 1 }], [S.F, {}], [S.K, { x: 1679, y: -330 }]] },
   branch:     { ax: -1, keys: [[S.E, { x: -5, y: v => v.V + 13, s: .68 }], [S.T, { x: 0, y: v => v.V - 328, s: 1 }], [S.F, {}], [S.K, { x: -414, y: v => v.V - 18 }]] },
 
@@ -249,7 +251,7 @@ function onScroll() {
 
 /* ---------- Stacked layout: the three kit cards are a carousel that loops forever ---------- */
 const cardsBox = $('.cards');
-const cardEls = $$('.card', cardsBox);
+const cardEls = $$('.card-slot', cardsBox);
 let cardClones = null, cardsTimer = 0;
 const cardsSetW = () => cardClones[cardEls.length].offsetLeft - cardEls[0].offsetLeft;   // one full set of cards
 function centreCard(el) { cardsBox.scrollLeft = el.offsetLeft - (cardsBox.clientWidth - el.offsetWidth) / 2; }
@@ -274,6 +276,52 @@ function setupCards() {
     }, 120);
   }, { passive: true });
 }
+
+/* Auto-advance: the carousel moves on by one card every few seconds; touching it pauses it for a while */
+let cardsPausedUntil = 0, cardsOnScreen = false;
+const pauseCards = () => { cardsPausedUntil = performance.now() + 5000; };
+['pointerdown', 'touchstart', 'wheel'].forEach(t => cardsBox.addEventListener(t, pauseCards, { passive: true }));
+new IntersectionObserver(es => { cardsOnScreen = es[0].isIntersecting; }, { threshold: .3 }).observe(cardsBox);
+setInterval(() => {
+  if (stage || !cardClones || !cardsOnScreen || document.hidden || reduced.matches || performance.now() < cardsPausedUntil) return;
+  const mid = cardsBox.scrollLeft + cardsBox.clientWidth / 2;
+  const all = [...cardsBox.children];
+  let cur = 0, best = Infinity;
+  all.forEach((el, i) => { const d = Math.abs(el.offsetLeft + el.offsetWidth / 2 - mid); if (d < best) { best = d; cur = i; } });
+  const next = all[cur + 1];
+  if (next) cardsBox.scrollTo({ left: next.offsetLeft - (cardsBox.clientWidth - next.offsetWidth) / 2, behavior: 'smooth' });
+}, 2800);
+
+/* 3D hover on the kit cards: grow a little and lean toward the cursor (same feel as the contact page's team cards) */
+const canHover = matchMedia('(hover: hover) and (pointer: fine)');
+$$('.cards .card').forEach(card => {
+  let tiltRaf = 0, last = null;
+  const apply = () => {
+    tiltRaf = 0;
+    if (!last) return;
+    const r = card.getBoundingClientRect();
+    const px = (last.x - r.left) / r.width - .5, py = (last.y - r.top) / r.height - .5;
+    card.style.setProperty('--ry', (px * 18).toFixed(2) + 'deg');
+    card.style.setProperty('--rx', (-py * 18).toFixed(2) + 'deg');
+  };
+  card.addEventListener('pointerenter', ev => {
+    if (!canHover.matches || reduced.matches) return;
+    card.style.setProperty('--sc', '1.05');
+    last = { x: ev.clientX, y: ev.clientY };
+    apply();
+    setTimeout(() => { if (last) card.classList.add('is-tilting'); }, 180);
+  });
+  card.addEventListener('pointermove', ev => {
+    if (!canHover.matches || reduced.matches) return;
+    last = { x: ev.clientX, y: ev.clientY };
+    if (!tiltRaf) tiltRaf = requestAnimationFrame(apply);
+  });
+  card.addEventListener('pointerleave', () => {
+    last = null;
+    card.classList.remove('is-tilting');
+    ['--rx', '--ry', '--sc'].forEach(p => card.style.removeProperty(p));
+  });
+});
 
 /* ---------- "Best viewed on a laptop or desktop" notice for the stacked layout ---------- */
 const notice = $('#notice');
