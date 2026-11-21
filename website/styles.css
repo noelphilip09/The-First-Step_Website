@@ -102,7 +102,7 @@ a { color: inherit; text-decoration: none; }
 .foot-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
 .li-btn { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: 52px; background: #0a66c2; overflow: hidden; transition: transform .25s var(--ease-out), background-color .25s ease; }
 .li-btn:hover { transform: translateY(-2px); background: #0b5cad; }
-.li-avatar { display: block; width: 39px; height: 39px; flex: none; border-radius: 50%; background: #fff; overflow: hidden; }
+.li-avatar { display: block; width: 39px; height: 39px; flex: none; border-radius: 50%; background: #dbe4dd; overflow: hidden; }
 .li-logo { width: 79px; height: 19.16px; }
 .foot-big { font-family: var(--inter); font-weight: 600; color: #4c7368; white-space: nowrap; }
 
