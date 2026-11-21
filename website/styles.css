@@ -141,6 +141,7 @@ a { color: inherit; text-decoration: none; }
    ===================================================================== */
 
 #track { display: none; }
+html:not(.stage) #stage { overflow-x: clip; }   /* illustrations hang past the edges; never widen the page */
 .fade, .leaf, .about-leaves, .floater, .pendant, .branch, .campus, .every-leaf, .foot-leaf, .foot-lamp, .how-bar, .hero-fade { display: none; }
 
 .nav { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; background: rgba(246, 244, 236, .86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
@@ -163,13 +164,43 @@ a { color: inherit; text-decoration: none; }
 .sec-how { max-width: none; padding-left: 12px; padding-right: 12px; }
 .panel { background: var(--panel); border-radius: 28px; padding: 40px 16px; max-width: 980px; margin: 0 auto; }
 .how-head { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
-.how-steps { display: flex; flex-direction: column; gap: 44px; margin-top: 40px; }
-.step-text { padding-left: 16px; border-left: 4px solid var(--teal); font-size: 18px; line-height: 1.4; }
+/* How it works: a swipeable carousel, one step per slide */
+.panel { position: relative; overflow: hidden; }
+.how-steps { display: flex; gap: 14px; margin: 32px -16px 0; padding: 4px 16px 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.how-steps::-webkit-scrollbar { display: none; }
+.step { flex: 0 0 86%; scroll-snap-align: center; display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 16px; padding: 12px 12px 18px; border-radius: 20px; background: var(--bg); }
+.step-text { padding-left: 14px; border-left: 4px solid var(--teal); font-size: 17px; line-height: 1.4; }
 .step-text h3 { font-family: var(--inter); font-weight: 700; font-size: inherit; }
 .step-text p { margin-top: 6px; font-family: var(--inter); font-weight: 500; }
-.step-shot { margin-top: 16px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 22.7px rgba(0, 0, 0, .15); }
-.step-shot img { width: 100%; height: auto; }
-.every { margin-top: 56px; padding: 40px 0 8px; }
+.step-shot { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 22.7px rgba(0, 0, 0, .15); aspect-ratio: 1099 / 631; }
+.step-shot img { width: 100%; height: 100%; object-fit: cover; }
+.how-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.how-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 8px; background: #d0cfcd; cursor: pointer; transition: width .3s var(--ease-out), background-color .3s ease; }
+.how-dots button.is-on { width: 26px; background: var(--teal); }
+html.stage .how-dots { display: none; }
+.every { position: relative; margin-top: 40px; padding: clamp(90px, 24vw, 150px) 0 clamp(110px, 30vw, 180px); }
+
+/* Illustrations in the stacked layout, sized off the window width */
+:is(.pendant, .branch, .campus, .foot-leaf, .foot-lamp, .every-leaf) > .crop { opacity: .5; }
+html:not(.stage) :is(.leaf, .every-leaf, .pendant, .campus, .foot-leaf, .foot-lamp) { display: block; position: absolute; pointer-events: none; }
+html:not(.stage) .sec-hero, html:not(.stage) .sec-components, html:not(.stage) .sec-team { position: relative; }
+html:not(.stage) .sec > :not(.leaf):not(.pendant):not(.campus), html:not(.stage) .footer > :not(.foot-leaf):not(.foot-lamp) { position: relative; z-index: 1; }
+html:not(.stage) .leaf-rot { width: 100%; opacity: .3; }
+html:not(.stage) .leaf-l { left: -26vw; top: -14vw; width: clamp(220px, 62vw, 460px); }
+html:not(.stage) .leaf-l .leaf-rot { aspect-ratio: 703 / 566; transform: rotate(60deg); }
+html:not(.stage) .leaf-r { right: -30vw; bottom: -6vw; width: clamp(200px, 56vw, 420px); }
+html:not(.stage) .leaf-r .leaf-rot { aspect-ratio: 703 / 605; transform: rotate(-105deg); }
+html:not(.stage) .every-leaf { width: clamp(110px, 34vw, 220px); aspect-ratio: 292 / 346; }
+html:not(.stage) .every-head { position: relative; z-index: 1; }
+html:not(.stage) .every-leaf-tr { right: -16px; top: 0; }
+html:not(.stage) .every-leaf-tr .crop { transform: rotate(180deg); }
+html:not(.stage) .every-leaf-bl { left: -20px; bottom: -44px; }
+html:not(.stage) .pendant { right: -12px; top: -8px; width: clamp(130px, 40vw, 260px); aspect-ratio: 443 / 359; }
+html:not(.stage) .statement { padding-top: clamp(70px, 22vw, 150px); }
+html:not(.stage) .sec-team { padding-bottom: clamp(70px, 20vw, 150px); }
+html:not(.stage) .campus { left: 50%; bottom: 0; width: max(100vw, 640px); aspect-ratio: 2435 / 421; transform: translateX(-50%); }
+html:not(.stage) .foot-leaf { left: -22vw; bottom: -14vw; width: clamp(200px, 60vw, 420px); aspect-ratio: 510 / 523; }
+html:not(.stage) .foot-lamp { right: -4vw; top: -24vw; width: clamp(90px, 28vw, 200px); aspect-ratio: 297 / 523; }
 
 .statement { font-family: var(--inter); font-weight: 600; font-size: clamp(20px, 4.6vw, 32px); line-height: 1.3; }
 .cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 36px; }
@@ -199,9 +230,9 @@ html.stage .footer { display: block; }
 @media (min-width: 720px) {
   .menu { display: flex; align-items: center; gap: 4px; }
   .btn-nav { padding: 10px 12px; }
-  .step { display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: center; }
-  .step-shot { margin-top: 0; }
+  .step { flex-basis: 62%; }
   .panel { padding: 56px 32px; }
+  .how-steps { margin-left: -32px; margin-right: -32px; padding-left: 32px; padding-right: 32px; }
 }
 
 /* =====================================================================
@@ -226,7 +257,7 @@ html.stage .fade-bottom-2 { z-index: 3; left: calc(-84px - var(--m)); width: cal
 html.stage .fade-top { z-index: 4; left: calc(-60px - var(--m)); width: calc(1848px + 2 * var(--m)); height: 579px; top: -416px; filter: blur(60px); }
 
 /* navbar */
-html.stage .nav { position: absolute; z-index: 6; top: 47px; height: 62px; padding: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; display: flex; align-items: center; justify-content: space-between; will-change: transform, width; }
+html.stage .nav { position: absolute; z-index: 6; top: 47px; height: 62px; padding: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; display: flex; align-items: center; justify-content: space-between; will-change: transform, width; transition: transform .6s var(--ease-out), width .6s var(--ease-out); }
 html.stage .menu { position: absolute; left: 50%; top: 0; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 8px 25px; border: 1px solid #efefef; border-radius: 65px; background: rgba(255, 255, 255, .5); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); box-shadow: 0 4px 19.6px rgba(0, 0, 0, .1); }
 html.stage .btn-nav { padding: 14px; }
 html.stage .brand-word { gap: 2.037px; }
@@ -249,7 +280,8 @@ html.stage .hero-card { left: 1149px; top: 0; }
 html.stage .hero-card .card { transform: scale(.6456); transform-origin: 0 0; }
 html.stage .hero-book { left: 0; top: 438px; width: 607px; height: 436px; filter: drop-shadow(0 4px 18.1px rgba(0, 0, 0, .25)); }
 html.stage .hero-book img, html.stage .kit-book img { width: 100%; height: 100%; }
-html.stage .hero-fade { left: 33.5px; top: 764px; width: 1462px; height: 327px; }
+html.stage .hero-fade { left: 33.5px; top: 764px; width: 1462px; height: 327px; z-index: 3; }
+html.stage .hero-book .intro { width: 100%; height: 100%; }
 
 /* entrance: the hero pieces fly in from where the loader frame parks them */
 html.stage .intro { transition: transform 1.5s var(--ease-out) .35s, opacity 1s ease .35s; }
@@ -283,15 +315,17 @@ html.stage .how-inner { width: 1688px; height: 1063px; }
 html.stage .how-head { position: absolute; left: 492px; top: 65px; width: 705px; gap: 8px; }
 html.stage .how-bar { position: absolute; left: 90px; top: 476px; width: 4px; height: 192px; border-radius: 13px; background: #d0cfcd; overflow: hidden; }
 html.stage .how-bar-fill { position: absolute; left: 0; top: 0; width: 4px; height: 39px; border-radius: 13px; background: var(--teal); }
-html.stage .how-steps { display: block; margin: 0; }
-html.stage .step { display: block; position: absolute; inset: 0; pointer-events: none; }
+html.stage .how-steps { display: block; margin: 0; padding: 0; overflow: visible; scroll-snap-type: none; }
+html.stage .step { display: block; position: absolute; inset: 0; padding: 0; border-radius: 0; background: none; pointer-events: none; }
+html.stage .how-inner { left: 50%; margin-left: -844px; }
 html.stage .step-text { position: absolute; left: 117px; top: 476px; width: 336px; height: 192px; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 0; border: 0; font-size: 24px; line-height: 1.4; opacity: 0; will-change: transform, opacity; }
 html.stage .step-text p { margin: 0; }
-html.stage .step-shot { position: absolute; left: 499px; top: 346px; width: 1099px; height: 631px; margin: 0; border-radius: 22px; opacity: 0; will-change: transform, opacity; }
+html.stage .step-shot { position: absolute; left: 499px; top: 346px; width: 1099px; height: 631px; margin: 0; aspect-ratio: auto; border-radius: 22px; opacity: 0; will-change: transform, opacity, filter; }
 html.stage .step-shot img { width: 100%; height: 100%; object-fit: cover; }
 html.stage .step.is-on .step-text, html.stage .step.is-on .step-shot { opacity: 1; }
 
 html.stage .every { position: absolute; inset: 0; margin: 0; padding: 0; pointer-events: none; }
+html.stage .statement { padding-top: 0; }
 html.stage .every-head { left: 0; right: 0; top: 274px; white-space: nowrap; }
 html.stage .every-leaf { width: 292px; height: 346px; }
 html.stage .every-leaf .crop { opacity: .5; }
@@ -328,8 +362,8 @@ html.stage .foot-word { gap: 2.945px; }
 html.stage .foot-cols { position: absolute; left: 605px; top: 101px; width: 941px; display: flex; flex-wrap: nowrap; gap: 2px; margin: 0; }
 html.stage .foot-col { width: 306px; min-width: 0; flex: none; }
 html.stage .foot-leaf { position: absolute; left: -167px; top: 256px; width: 510px; height: 523px; }
-html.stage .foot-lamp { position: absolute; left: 1431px; top: -252px; width: 297px; height: 523px; }
-html.stage .foot-big { left: 224.84px; top: 444px; z-index: 0; margin: 0; font-size: 201.789px; line-height: 1.4; transform: none; }
+html.stage .foot-lamp { position: absolute; left: auto; right: -40px; top: -252px; width: 297px; height: 523px; }
+html.stage .foot-big { left: 0; right: 0; top: 444px; z-index: 0; margin: 0; text-align: center; font-size: 201.789px; line-height: 1.4; transform: none; }
 html.stage .foot-brand, html.stage .foot-cols { z-index: 1; }
 
 @media (prefers-reduced-motion: reduce) {

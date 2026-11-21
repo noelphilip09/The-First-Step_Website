@@ -41,13 +41,15 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
    to the left/right window edge. ---------- */
 const footerZ = v => v.V - 652;
 const panelFit = v => Math.min(1, (v.V - 175) / 1063);
+const panelW = v => (1688 + 2 * v.m) / panelFit(v);      // edge to edge once the fit scale is applied
 
 const LAYERS = {
-  nav:        { keys: [[S.H, { x: 110, w: 1508 }], [S.A, { x: 365, w: 998, e: io }]] },
-
   leafL:      { ax: -1, keys: [[S.H, { x: -490, y: -92, o: 1 }], [S.A, { y: -760, o: 0 }]] },
   leafR:      { ax: 1,  keys: [[S.H, { x: 1459, y: 701, o: 1 }], [S.A, { y: -250, o: 0 }]] },
   hero:       { keys: [[S.H, { x: 110, y: 350 }], [S.A, { y: -1022 }], [S.A2, { y: -1700 }]] },
+  // the booklet and plant card drift away from the laptop as the hero scrolls off
+  heroBook:   { keys: [[S.H, { x: 0, y: 0, r: 0 }], [S.A * .75, { x: -460, y: 150, r: -12, e: out }]] },
+  heroCard:   { keys: [[S.H, { x: 0, y: 0, r: 0 }], [S.A * .75, { x: 380, y: -170, r: 11, e: out }]] },
 
   aboutText:  { keys: [[S.H, { x: 110, y: 1307 }], [S.A, { y: 327 }], [S.A2, { y: 327 }], [S.W1, { y: -1313 }]] },
   aboutLeaves:{ ax: -1, keys: [[S.H, { x: -114, y: v => v.V + 1032 }], [S.A, { y: v => v.V - 528 }], [S.A2, { y: v => v.V - 590 }], [S.W1, { y: -903 }]] },
@@ -59,7 +61,7 @@ const LAYERS = {
   fadeTop:    { keys: [[S.A2, { o: 0 }], [S.W1, { o: 1 }]] },
 
   panel:      { origin: 'center', keys: [
-                [S.H,  { x: 20, y: v => v.V + 9, w: 1688, h: 1063, s: 1 }],
+                [S.H,  { x: v => 864 - panelW(v) / 2, y: v => v.V + 9, w: panelW, h: 1063, s: 1 }],
                 [S.A,  { y: v => v.V + 72 }],
                 [S.A2, { y: v => v.V + 72 }],
                 [S.W1, { y: v => 155 - 1063 * (1 - panelFit(v)) / 2, s: panelFit }],
@@ -85,7 +87,7 @@ const LAYERS = {
   campus:     { keys: [[S.K, { x: -387, y: v => v.V + 1102 }], [S.M, { y: v => v.V - 404 }], [S.Z, { y: v => v.V + 6 }]] },
   team:       { keys: [[S.K, { x: 317, y: v => v.V + 96 }], [S.M, { y: 205 }], [S.Z, { y: v => footerZ(v) - 958 }]] },
   fadeBottom2:{ keys: [[S.K, { y: v => v.V - 98, o: 0 }], [S.M, { o: 1 }]] },
-  footer:     { keys: [[S.K, { x: 20, y: v => v.V + 1224 }], [S.M, { y: v => v.V + 68 }], [S.Z, { y: footerZ }]] },
+  footer:     { keys: [[S.K, { x: v => 20 - v.m, w: v => 1688 + 2 * v.m, y: v => v.V + 1224 }], [S.M, { y: v => v.V + 68 }], [S.Z, { y: footerZ }]] },
   footBig:    { keys: [[S.M, { y: 170 }], [S.Z, { y: 0, e: out }]] },
 };
 
@@ -194,6 +196,8 @@ function render(s) {
     st.shot.style.opacity = o.toFixed(3);
     st.shot.style.transform = `translate3d(0,${(-d * 70).toFixed(1)}px,0) scale(${(1 - Math.min(.04, Math.abs(d) * .06)).toFixed(4)})`;
     st.shot.style.zIndex = Math.round(10 - Math.abs(d) * 4);
+    const blur = Math.min(18, Math.abs(d) * 34);          // the screenshot blurs as it travels, sharp when settled
+    st.shot.style.filter = blur > .4 ? `blur(${blur.toFixed(1)}px)` : 'none';
   });
   const i0 = Math.floor(f), t = f - i0;
   const h = HOW_FILL[i0] + ((HOW_FILL[Math.min(6, i0 + 1)] - HOW_FILL[i0]) * io(t));
@@ -222,7 +226,19 @@ function tick(now) {
   render(cur);
   if (cur === target) { raf = 0; lastT = 0; } else raf = requestAnimationFrame(tick);
 }
+/* Navbar: full width at the top and whenever the page is scrolled upward, compact while scrolling down */
+const nav = $('.nav');
+let navWide = null, lastY = 0;
+function setNav(wide) {
+  if (wide === navWide) return;
+  navWide = wide;
+  nav.style.transform = `translate3d(${wide ? 110 : 365}px,0,0)`;
+  nav.style.width = (wide ? 1508 : 998) + 'px';
+}
 function onScroll() {
+  const y = scrollY;
+  if (y < 80 * k || y < lastY - 2) setNav(true); else if (y > lastY + 2) setNav(false);
+  lastY = y;
   target = clamp(scrollY / k, 0, TOTAL);
   if (!raf) raf = requestAnimationFrame(tick);
 }
@@ -238,6 +254,7 @@ function measure() {
   track.style.height = Math.round(TOTAL * k + vh) + 'px';
   root.style.setProperty('--k', k.toFixed(4));
   resolve();
+  const wide = navWide ?? scrollY < 80 * k; navWide = null; setNav(wide); lastY = scrollY;
   target = cur = clamp(scrollY / k, 0, TOTAL);
   render(cur);
 }
@@ -247,6 +264,7 @@ function clearStage() {
   for (const L of layers) { L.el.style.cssText = ''; if (L.def.origin) L.el.style.transformOrigin = ''; L.last = ''; }
   steps.forEach(st => { st.text.style.cssText = ''; st.shot.style.cssText = ''; });
   howFill.style.height = '';
+  nav.style.transform = ''; nav.style.width = ''; navWide = null;
   Object.keys(words).forEach(key => revealWords(key, 1));
   track.style.height = '';
 }
@@ -281,12 +299,33 @@ document.addEventListener('click', ev => {
 });
 
 /* ---------- Stacked layout: reveal blocks as they enter ---------- */
-const riseEls = $$('.hero-copy, .hero-mac, .about-text, .how-head, .step, .every, .statement, .card, .kit-head, .kit-note, .kit-book, .team-head, .team-photo, .foot-brand, .foot-col');
+const riseEls = $$('.hero-copy, .hero-mac, .about-text, .how-head, .how-steps, .every, .statement, .card, .kit-head, .kit-note, .kit-book, .team-head, .team-photo, .foot-brand, .foot-col');
 riseEls.forEach(el => el.classList.add('rise'));
 const riseIO = new IntersectionObserver(entries => {
   entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); riseIO.unobserve(en.target); } });
 }, { rootMargin: '0px 0px -10% 0px' });
 riseEls.forEach(el => riseIO.observe(el));
+
+/* ---------- Stacked layout: "How it works" is a swipeable carousel with dots ---------- */
+const howList = $('.how-steps');
+const dots = document.createElement('div');
+dots.className = 'how-dots';
+steps.forEach((st, i) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.setAttribute('aria-label', `Step ${i + 1}: ${$('h3', st.el).textContent}`);
+  b.addEventListener('click', () => howList.scrollTo({ left: st.el.offsetLeft - howList.offsetLeft - (howList.clientWidth - st.el.offsetWidth) / 2, behavior: reduced.matches ? 'auto' : 'smooth' }));
+  dots.append(b);
+});
+howList.after(dots);
+function syncDots() {
+  const box = howList.getBoundingClientRect(), mid = box.left + box.width / 2;
+  let best = 0, bestD = Infinity;
+  steps.forEach((st, i) => { const r = st.el.getBoundingClientRect(); const d = Math.abs(r.left + r.width / 2 - mid); if (d < bestD) { bestD = d; best = i; } });
+  [...dots.children].forEach((b, i) => b.classList.toggle('is-on', i === best));
+}
+howList.addEventListener('scroll', syncDots, { passive: true });
+syncDots();
 
 /* ---------- Boot ---------- */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
